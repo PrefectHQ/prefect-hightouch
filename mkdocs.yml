@@ -48,10 +48,4 @@ plugins:
 
 nav:
     - Home: index.md
-    - Credentials: credentials.md
-    - Destinations: destinations.md
-    - Models: models.md
-    - Rest: rest.md
-    - Sources: sources.md
-    - Syncs: syncs.md
     
