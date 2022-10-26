@@ -8,14 +8,14 @@ Hightouch syncs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:21:11.837443
+# Updated at: 2022-10-26T03:28:44.861459
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
-from prefect_hightouch.api_client.api.default.get_sync import asyncio
+from prefect_hightouch.api_client.api.default.list_sync_runs import asyncio as request
 
 
 @task
@@ -68,5 +68,16 @@ async def list_sync_runs(
     | 422 | Validation Failed. |
     """  # noqa
     client = hightouch_credentials.get_client()
-    parsed = await asyncio(client=client)
+    parsed = await request(
+        sync_id=sync_id,
+        hightouch_credentials=hightouch_credentials,
+        run_id=run_id,
+        limit=limit,
+        offset=offset,
+        after=after,
+        before=before,
+        within=within,
+        order_by=order_by,
+        client=client,
+    )
     return parsed

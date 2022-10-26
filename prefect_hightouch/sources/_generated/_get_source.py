@@ -8,14 +8,14 @@ Hightouch sources
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:21:11.835244
+# Updated at: 2022-10-26T03:28:44.859424
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
-from prefect_hightouch.api_client.api.default.get_sync import asyncio
+from prefect_hightouch.api_client.api.default.get_source import asyncio as request
 
 
 @task
@@ -47,5 +47,7 @@ async def get_source(
     | 422 | Validation Failed. |
     """  # noqa
     client = hightouch_credentials.get_client()
-    parsed = await asyncio(client=client)
+    parsed = await request(
+        source_id=source_id, hightouch_credentials=hightouch_credentials, client=client
+    )
     return parsed

@@ -8,14 +8,14 @@ Hightouch models
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:21:11.833896
+# Updated at: 2022-10-26T03:28:44.858480
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
-from prefect_hightouch.api_client.api.default.get_sync import asyncio
+from prefect_hightouch.api_client.api.default.get_model import asyncio as request
 
 
 @task
@@ -46,5 +46,7 @@ async def get_model(
     | 404 | Not found. |
     """  # noqa
     client = hightouch_credentials.get_client()
-    parsed = await asyncio(client=client)
+    parsed = await request(
+        model_id=model_id, hightouch_credentials=hightouch_credentials, client=client
+    )
     return parsed

@@ -8,14 +8,14 @@ Hightouch models
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:21:11.832943
+# Updated at: 2022-10-26T03:28:44.857791
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
-from prefect_hightouch.api_client.api.default.get_sync import asyncio
+from prefect_hightouch.api_client.api.default.list_model import asyncio as request
 
 
 @task
@@ -56,5 +56,12 @@ async def list_model(
     | 422 | Validation Failed. |
     """  # noqa
     client = hightouch_credentials.get_client()
-    parsed = await asyncio(client=client)
+    parsed = await request(
+        hightouch_credentials=hightouch_credentials,
+        name=name,
+        slug=slug,
+        limit=limit,
+        order_by=order_by,
+        client=client,
+    )
     return parsed
