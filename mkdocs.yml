@@ -48,3 +48,10 @@ watch:
 
 nav:
     - Home: index.md
+    - Api Client: api_client.md
+    - Syncs: syncs.md
+    - Destinations: destinations.md
+    - Models: models.md
+    - Sources: sources.md
+    - Credentials: credentials.md
+    

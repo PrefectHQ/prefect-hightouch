@@ -1,4 +1,4 @@
 from . import _version
-from .blocks import HightouchBlock  # noqa
+from .credentials import HightouchCredentials  # noqa: E501, F401
 
 __version__ = _version.get_versions()["version"]
