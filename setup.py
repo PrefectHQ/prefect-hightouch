@@ -13,9 +13,9 @@ with open("README.md") as readme_file:
 
 setup(
     name="prefect-hightouch",
-    description="Prefect integrations for interacting with prefect-hightouch.",
+    description="Prefect integrations for interacting with Hightouch.",
     license="Apache License 2.0",
-    author="Prefect Technologies Inc.",
+    author="Prefect Technologies, Inc.",
     author_email="help@prefect.io",
     keywords="prefect",
     url="https://github.com/PrefectHQ/prefect-hightouch",
@@ -29,7 +29,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "HightouchCredentials = prefect_hightouch.credentials",
+            "prefect_hightouch = prefect_hightouch",
         ]
     },
     classifiers=[
