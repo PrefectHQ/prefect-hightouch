@@ -8,27 +8,30 @@ Hightouch syncs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:28:44.861459
+# Updated at: 2022-10-27T03:04:31.820092
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.api_client import api, models, types  # noqa
 from prefect_hightouch.api_client.api.default.list_sync_runs import asyncio as request
 
 
 @task
 async def list_sync_runs(
-    sync_id: str,
+    sync_id: float,
     hightouch_credentials: "HightouchCredentials",
-    run_id: Optional[str] = None,
-    limit: Optional[str] = None,
-    offset: Optional[str] = None,
-    after: Optional[str] = None,
-    before: Optional[str] = None,
-    within: Optional[str] = None,
-    order_by: str = "id",
+    run_id: Union[types.Unset, None, float] = types.UNSET,
+    limit: Union[types.Unset, None, float] = types.UNSET,
+    offset: Union[types.Unset, None, float] = types.UNSET,
+    after: Union[types.Unset, None, datetime.datetime] = types.UNSET,
+    before: Union[types.Unset, None, datetime.datetime] = types.UNSET,
+    within: Union[types.Unset, None, float] = types.UNSET,
+    order_by: Union[
+        types.Unset, None, models.list_sync_runs_order_by.ListSyncRunsOrderBy
+    ] = id,
 ) -> Dict[str, Any]:  # pragma: no cover
     """
     List all sync runs under a sync.

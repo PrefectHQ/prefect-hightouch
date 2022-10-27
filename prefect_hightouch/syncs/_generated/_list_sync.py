@@ -8,25 +8,26 @@ Hightouch syncs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:28:44.859862
+# Updated at: 2022-10-27T03:04:31.817425
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.api_client import api, models, types  # noqa
 from prefect_hightouch.api_client.api.default.list_sync import asyncio as request
 
 
 @task
 async def list_sync(
     hightouch_credentials: "HightouchCredentials",
-    slug: Optional[str] = None,
-    model_id: Optional[str] = None,
-    after: Optional[str] = None,
-    before: Optional[str] = None,
-    limit: Optional[str] = None,
-    order_by: str = "id",
+    slug: Union[types.Unset, None, str] = types.UNSET,
+    model_id: Union[types.Unset, None, float] = types.UNSET,
+    after: Union[types.Unset, None, datetime.datetime] = types.UNSET,
+    before: Union[types.Unset, None, datetime.datetime] = types.UNSET,
+    limit: Union[types.Unset, None, float] = types.UNSET,
+    order_by: Union[types.Unset, None, models.list_sync_order_by.ListSyncOrderBy] = id,
 ) -> Dict[str, Any]:  # pragma: no cover
     """
     List all the syncs in the current workspace.

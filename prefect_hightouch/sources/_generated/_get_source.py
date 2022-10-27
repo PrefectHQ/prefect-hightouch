@@ -8,19 +8,20 @@ Hightouch sources
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:28:44.859424
+# Updated at: 2022-10-27T03:04:31.816331
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.api_client import api, models, types  # noqa
 from prefect_hightouch.api_client.api.default.get_source import asyncio as request
 
 
 @task
 async def get_source(
-    source_id: str,
+    source_id: float,
     hightouch_credentials: "HightouchCredentials",
 ) -> Dict[str, Any]:  # pragma: no cover
     """

@@ -8,19 +8,20 @@ Hightouch destinations
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:28:44.857354
+# Updated at: 2022-10-27T03:04:31.811310
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.api_client import api, models, types  # noqa
 from prefect_hightouch.api_client.api.default.get_destination import asyncio as request
 
 
 @task
 async def get_destination(
-    destination_id: str,
+    destination_id: float,
     hightouch_credentials: "HightouchCredentials",
 ) -> Dict[str, Any]:  # pragma: no cover
     """

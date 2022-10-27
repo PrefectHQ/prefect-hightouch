@@ -8,23 +8,26 @@ Hightouch destinations
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-26T03:28:44.855420
+# Updated at: 2022-10-27T03:04:31.808203
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
 from prefect import task
 
 from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.api_client import api, models, types  # noqa
 from prefect_hightouch.api_client.api.default.list_destination import asyncio as request
 
 
 @task
 async def list_destination(
     hightouch_credentials: "HightouchCredentials",
-    name: Optional[str] = None,
-    slug: Optional[str] = None,
-    limit: Optional[str] = None,
-    order_by: str = "id",
+    name: Union[types.Unset, None, str] = types.UNSET,
+    slug: Union[types.Unset, None, str] = types.UNSET,
+    limit: Union[types.Unset, None, float] = types.UNSET,
+    order_by: Union[
+        types.Unset, None, models.list_destination_order_by.ListDestinationOrderBy
+    ] = id,
 ) -> Dict[str, Any]:  # pragma: no cover
     """
     List the destinations in the user's workspace.
