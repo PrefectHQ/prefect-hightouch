@@ -39,6 +39,8 @@ class SyncRunSuccessfulRows:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        if src_dict is None:
+            return {}
         d = src_dict.copy()
         added_count = d.pop("addedCount")
 
@@ -60,7 +62,7 @@ class SyncRunSuccessfulRows:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
-        return self.additional_properties[key]
+        return self.additional_properties.get(key)
 
     def __setitem__(self, key: str, value: Any) -> None:
         self.additional_properties[key] = value

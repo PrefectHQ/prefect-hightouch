@@ -1,9 +1,7 @@
 """Credential classes used to perform authenticated interactions with Hightouch"""
 
-from base64 import b64encode
 from typing import Any, Dict
 
-from httpx import AsyncClient
 from prefect.blocks.core import Block
 from pydantic import Field, SecretStr
 

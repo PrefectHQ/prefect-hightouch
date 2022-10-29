@@ -3,8 +3,8 @@
 # is outdated, rerun scripts/generate.py.
 
 from prefect_hightouch.api_client.api.default.get_destination import (  # noqa: F401
-    asyncio as get_destination,
+    asyncio_task as get_destination,
 )
 from prefect_hightouch.api_client.api.default.list_destination import (  # noqa: F401
-    asyncio as list_destination,
+    asyncio_task as list_destination,
 )

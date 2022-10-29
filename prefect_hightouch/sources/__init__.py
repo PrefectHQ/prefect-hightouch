@@ -3,8 +3,8 @@
 # is outdated, rerun scripts/generate.py.
 
 from prefect_hightouch.api_client.api.default.get_source import (  # noqa: F401
-    asyncio as get_source,
+    asyncio_task as get_source,
 )
 from prefect_hightouch.api_client.api.default.list_source import (  # noqa: F401
-    asyncio as list_source,
+    asyncio_task as list_source,
 )
