@@ -15,13 +15,6 @@ class Destination:
     SFTP server)
 
         Attributes:
-            id (str): The destination's id
-            name (str): The destination's name
-            slug (str): The destination's slug
-            workspace_id (str): The id of the workspace that the destination belongs to
-            created_at (datetime.datetime): The timestamp when the destination was created
-            updated_at (datetime.datetime): The timestamp when the destination was last updated
-            type (str): The destination's type (e.g. salesforce or hubspot).
             configuration (DestinationConfiguration): The destination's configuration. This specifies general metadata about
                 destination, like hostname and username.
                 Hightouch will be using this configuration to connect to destination.
@@ -30,47 +23,55 @@ class Destination:
 
                 Consumers should NOT make assumptions on the contents of the
                 configuration. It may change as Hightouch updates its internal code.
+            created_at (datetime.datetime): The timestamp when the destination was created
+            id (str): The destination's id
+            name (str): The destination's name
+            slug (str): The destination's slug
             syncs (List[str]): A list of syncs that sync to this destination.
+            type (str): The destination's type (e.g. salesforce or hubspot).
+            updated_at (datetime.datetime): The timestamp when the destination was last updated
+            workspace_id (str): The id of the workspace that the destination belongs to
     """
 
+    configuration: DestinationConfiguration
+    created_at: datetime.datetime
     id: str
     name: str
     slug: str
-    workspace_id: str
-    created_at: datetime.datetime
-    updated_at: datetime.datetime
-    type: str
-    configuration: DestinationConfiguration
     syncs: List[str]
+    type: str
+    updated_at: datetime.datetime
+    workspace_id: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        configuration = self.configuration.to_dict()
+
+        created_at = self.created_at.isoformat()
+
         id = self.id
         name = self.name
         slug = self.slug
-        workspace_id = self.workspace_id
-        created_at = self.created_at.isoformat()
-
-        updated_at = self.updated_at.isoformat()
+        syncs = self.syncs
 
         type = self.type
-        configuration = self.configuration.to_dict()
+        updated_at = self.updated_at.isoformat()
 
-        syncs = self.syncs
+        workspace_id = self.workspace_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "configuration": configuration,
+                "createdAt": created_at,
                 "id": id,
                 "name": name,
                 "slug": slug,
-                "workspaceId": workspace_id,
-                "createdAt": created_at,
-                "updatedAt": updated_at,
-                "type": type,
-                "configuration": configuration,
                 "syncs": syncs,
+                "type": type,
+                "updatedAt": updated_at,
+                "workspaceId": workspace_id,
             }
         )
 
@@ -79,34 +80,34 @@ class Destination:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        configuration = DestinationConfiguration.from_dict(d.pop("configuration"))
+
+        created_at = isoparse(d.pop("createdAt"))
+
         id = d.pop("id")
 
         name = d.pop("name")
 
         slug = d.pop("slug")
 
-        workspace_id = d.pop("workspaceId")
-
-        created_at = isoparse(d.pop("createdAt"))
-
-        updated_at = isoparse(d.pop("updatedAt"))
+        syncs = cast(List[str], d.pop("syncs"))
 
         type = d.pop("type")
 
-        configuration = DestinationConfiguration.from_dict(d.pop("configuration"))
+        updated_at = isoparse(d.pop("updatedAt"))
 
-        syncs = cast(List[str], d.pop("syncs"))
+        workspace_id = d.pop("workspaceId")
 
         destination = cls(
+            configuration=configuration,
+            created_at=created_at,
             id=id,
             name=name,
             slug=slug,
-            workspace_id=workspace_id,
-            created_at=created_at,
-            updated_at=updated_at,
-            type=type,
-            configuration=configuration,
             syncs=syncs,
+            type=type,
+            updated_at=updated_at,
+            workspace_id=workspace_id,
         )
 
         destination.additional_properties = d

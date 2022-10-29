@@ -13,28 +13,28 @@ class SyncRunPlannedRows:
     to `plannedRows` if the sync was cancelled.
 
         Attributes:
-            removed_count (float): The number of removed rows.
-            changed_count (float): The number of changed rows.
             added_count (float): The number of added rows.
+            changed_count (float): The number of changed rows.
+            removed_count (float): The number of removed rows.
     """
 
-    removed_count: float
-    changed_count: float
     added_count: float
+    changed_count: float
+    removed_count: float
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        removed_count = self.removed_count
-        changed_count = self.changed_count
         added_count = self.added_count
+        changed_count = self.changed_count
+        removed_count = self.removed_count
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "removedCount": removed_count,
-                "changedCount": changed_count,
                 "addedCount": added_count,
+                "changedCount": changed_count,
+                "removedCount": removed_count,
             }
         )
 
@@ -43,16 +43,16 @@ class SyncRunPlannedRows:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        removed_count = d.pop("removedCount")
+        added_count = d.pop("addedCount")
 
         changed_count = d.pop("changedCount")
 
-        added_count = d.pop("addedCount")
+        removed_count = d.pop("removedCount")
 
         sync_run_planned_rows = cls(
-            removed_count=removed_count,
-            changed_count=changed_count,
             added_count=added_count,
+            changed_count=changed_count,
+            removed_count=removed_count,
         )
 
         sync_run_planned_rows.additional_properties = d

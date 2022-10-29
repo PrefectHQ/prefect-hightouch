@@ -3,7 +3,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.list_sync_runs_order_by import ListSyncRunsOrderBy
 from ...models.list_sync_runs_response_200 import ListSyncRunsResponse200
@@ -282,3 +284,47 @@ async def asyncio(
             order_by=order_by,
         )
     ).parsed
+
+
+@task(name="ListSyncRuns")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    sync_id: float,
+    run_id: Union[Unset, None, float] = UNSET,
+    limit: Union[Unset, None, float] = UNSET,
+    offset: Union[Unset, None, float] = UNSET,
+    after: Union[Unset, None, datetime.datetime] = UNSET,
+    before: Union[Unset, None, datetime.datetime] = UNSET,
+    within: Union[Unset, None, float] = UNSET,
+    order_by: Union[Unset, None, ListSyncRunsOrderBy] = ListSyncRunsOrderBy.ID,
+) -> Optional[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]:
+    """List Sync Runs
+
+     List all sync runs under a sync
+
+    Args:
+        sync_id (float):
+        run_id (Union[Unset, None, float]):
+        limit (Union[Unset, None, float]):
+        offset (Union[Unset, None, float]):
+        after (Union[Unset, None, datetime.datetime]):
+        before (Union[Unset, None, datetime.datetime]):
+        within (Union[Unset, None, float]):
+        order_by (Union[Unset, None, ListSyncRunsOrderBy]):  Default: ListSyncRunsOrderBy.ID.
+
+    Returns:
+        Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        sync_id=sync_id,
+        client=client,
+        run_id=run_id,
+        limit=limit,
+        offset=offset,
+        after=after,
+        before=before,
+        within=within,
+        order_by=order_by,
+    )

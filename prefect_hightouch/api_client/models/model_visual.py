@@ -10,32 +10,32 @@ class ModelVisual:
     """Visual query, used by audience
 
     Attributes:
-        secondary_label (str):
-        primary_label (str):
         filter_ (Any):
         parent_id (str): Parent id of the schema that visual query is based on
+        primary_label (str):
+        secondary_label (str):
     """
 
-    secondary_label: str
-    primary_label: str
     filter_: Any
     parent_id: str
+    primary_label: str
+    secondary_label: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        secondary_label = self.secondary_label
-        primary_label = self.primary_label
         filter_ = self.filter_
         parent_id = self.parent_id
+        primary_label = self.primary_label
+        secondary_label = self.secondary_label
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "secondaryLabel": secondary_label,
-                "primaryLabel": primary_label,
                 "filter": filter_,
                 "parentId": parent_id,
+                "primaryLabel": primary_label,
+                "secondaryLabel": secondary_label,
             }
         )
 
@@ -44,19 +44,19 @@ class ModelVisual:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        secondary_label = d.pop("secondaryLabel")
-
-        primary_label = d.pop("primaryLabel")
-
         filter_ = d.pop("filter")
 
         parent_id = d.pop("parentId")
 
+        primary_label = d.pop("primaryLabel")
+
+        secondary_label = d.pop("secondaryLabel")
+
         model_visual = cls(
-            secondary_label=secondary_label,
-            primary_label=primary_label,
             filter_=filter_,
             parent_id=parent_id,
+            primary_label=primary_label,
+            secondary_label=secondary_label,
         )
 
         model_visual.additional_properties = d

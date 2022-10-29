@@ -2,7 +2,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.sync import Sync
 from ...types import Response
@@ -150,3 +152,26 @@ async def asyncio(
             client=client,
         )
     ).parsed
+
+
+@task(name="GetSync")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    sync_id: float,
+) -> Optional[Union[Any, Sync]]:
+    """Get Sync
+
+     Retrieve sync from sync ID
+
+    Args:
+        sync_id (float):
+
+    Returns:
+        Response[Union[Any, Sync]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        sync_id=sync_id,
+        client=client,
+    )

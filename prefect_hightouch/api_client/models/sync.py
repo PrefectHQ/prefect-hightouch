@@ -18,13 +18,6 @@ class Sync:
     run, and syncs them to Sync's destination.
 
         Attributes:
-            id (str): The sync's id
-            slug (str): The sync's slug
-            workspace_id (str): The id of the workspace that the sync belongs to
-            created_at (datetime.datetime): The timestamp when the sync was created
-            updated_at (datetime.datetime): The timestamp when the sync was last updated
-            destination_id (str): The id of the Destination that sync is connected to
-            model_id (str): The id of the Model that sync is connected to
             configuration (SyncConfiguration): The sync's configuration. This specifies how data is mapped, among other
                 configuration.
 
@@ -32,6 +25,14 @@ class Sync:
 
                 Consumers should NOT make assumptions on the contents of the
                 configuration. It may change as Hightouch updates its internal code.
+            created_at (datetime.datetime): The timestamp when the sync was created
+            destination_id (str): The id of the Destination that sync is connected to
+            disabled (bool): Whether the sync has been disabled by the user.
+            id (str): The sync's id
+            last_run_at (datetime.datetime): The timestamp of the last sync run
+            model_id (str): The id of the Model that sync is connected to
+            primary_key (str): The primary key that sync uses to identify data from source
+            referenced_columns (List[str]): The reference column that sync depends on to sync data from source
             schedule (SyncSchedule): The scheduling configuration. It can be triggerd based on several ways:
 
                 Interval: the sync will be trigged based on certain interval(minutes/hours/days/weeks)
@@ -41,70 +42,69 @@ class Sync:
                 Visual: the sync will be trigged based a visual cron configuration on UI
 
                 DBT-cloud: the sync will be trigged based on a dbt cloud job
+            slug (str): The sync's slug
             status (SyncStatus):
-            disabled (bool): Whether the sync has been disabled by the user.
-            last_run_at (datetime.datetime): The timestamp of the last sync run
-            referenced_columns (List[str]): The reference column that sync depends on to sync data from source
-            primary_key (str): The primary key that sync uses to identify data from source
+            updated_at (datetime.datetime): The timestamp when the sync was last updated
+            workspace_id (str): The id of the workspace that the sync belongs to
     """
 
-    id: str
-    slug: str
-    workspace_id: str
-    created_at: datetime.datetime
-    updated_at: datetime.datetime
-    destination_id: str
-    model_id: str
     configuration: SyncConfiguration
-    schedule: SyncSchedule
-    status: SyncStatus
+    created_at: datetime.datetime
+    destination_id: str
     disabled: bool
+    id: str
     last_run_at: datetime.datetime
-    referenced_columns: List[str]
+    model_id: str
     primary_key: str
+    referenced_columns: List[str]
+    schedule: SyncSchedule
+    slug: str
+    status: SyncStatus
+    updated_at: datetime.datetime
+    workspace_id: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        slug = self.slug
-        workspace_id = self.workspace_id
+        configuration = self.configuration.to_dict()
+
         created_at = self.created_at.isoformat()
 
-        updated_at = self.updated_at.isoformat()
-
         destination_id = self.destination_id
+        disabled = self.disabled
+        id = self.id
+        last_run_at = self.last_run_at.isoformat()
+
         model_id = self.model_id
-        configuration = self.configuration.to_dict()
+        primary_key = self.primary_key
+        referenced_columns = self.referenced_columns
 
         schedule = self.schedule.to_dict()
 
+        slug = self.slug
         status = self.status.value
 
-        disabled = self.disabled
-        last_run_at = self.last_run_at.isoformat()
+        updated_at = self.updated_at.isoformat()
 
-        referenced_columns = self.referenced_columns
-
-        primary_key = self.primary_key
+        workspace_id = self.workspace_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "id": id,
-                "slug": slug,
-                "workspaceId": workspace_id,
-                "createdAt": created_at,
-                "updatedAt": updated_at,
-                "destinationId": destination_id,
-                "modelId": model_id,
                 "configuration": configuration,
-                "schedule": schedule,
-                "status": status,
+                "createdAt": created_at,
+                "destinationId": destination_id,
                 "disabled": disabled,
+                "id": id,
                 "lastRunAt": last_run_at,
-                "referencedColumns": referenced_columns,
+                "modelId": model_id,
                 "primaryKey": primary_key,
+                "referencedColumns": referenced_columns,
+                "schedule": schedule,
+                "slug": slug,
+                "status": status,
+                "updatedAt": updated_at,
+                "workspaceId": workspace_id,
             }
         )
 
@@ -113,49 +113,49 @@ class Sync:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id")
-
-        slug = d.pop("slug")
-
-        workspace_id = d.pop("workspaceId")
+        configuration = SyncConfiguration.from_dict(d.pop("configuration"))
 
         created_at = isoparse(d.pop("createdAt"))
 
-        updated_at = isoparse(d.pop("updatedAt"))
-
         destination_id = d.pop("destinationId")
-
-        model_id = d.pop("modelId")
-
-        configuration = SyncConfiguration.from_dict(d.pop("configuration"))
-
-        schedule = SyncSchedule.from_dict(d.pop("schedule"))
-
-        status = SyncStatus(d.pop("status"))
 
         disabled = d.pop("disabled")
 
+        id = d.pop("id")
+
         last_run_at = isoparse(d.pop("lastRunAt"))
 
-        referenced_columns = cast(List[str], d.pop("referencedColumns"))
+        model_id = d.pop("modelId")
 
         primary_key = d.pop("primaryKey")
 
+        referenced_columns = cast(List[str], d.pop("referencedColumns"))
+
+        schedule = SyncSchedule.from_dict(d.pop("schedule"))
+
+        slug = d.pop("slug")
+
+        status = SyncStatus(d.pop("status"))
+
+        updated_at = isoparse(d.pop("updatedAt"))
+
+        workspace_id = d.pop("workspaceId")
+
         sync = cls(
-            id=id,
-            slug=slug,
-            workspace_id=workspace_id,
-            created_at=created_at,
-            updated_at=updated_at,
-            destination_id=destination_id,
-            model_id=model_id,
             configuration=configuration,
-            schedule=schedule,
-            status=status,
+            created_at=created_at,
+            destination_id=destination_id,
             disabled=disabled,
+            id=id,
             last_run_at=last_run_at,
-            referenced_columns=referenced_columns,
+            model_id=model_id,
             primary_key=primary_key,
+            referenced_columns=referenced_columns,
+            schedule=schedule,
+            slug=slug,
+            status=status,
+            updated_at=updated_at,
+            workspace_id=workspace_id,
         )
 
         sync.additional_properties = d

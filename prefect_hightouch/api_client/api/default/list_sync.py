@@ -3,7 +3,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.list_sync_order_by import ListSyncOrderBy
 from ...models.list_sync_response_200 import ListSyncResponse200
@@ -254,3 +256,41 @@ async def asyncio(
             order_by=order_by,
         )
     ).parsed
+
+
+@task(name="ListSync")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    slug: Union[Unset, None, str] = UNSET,
+    model_id: Union[Unset, None, float] = UNSET,
+    after: Union[Unset, None, datetime.datetime] = UNSET,
+    before: Union[Unset, None, datetime.datetime] = UNSET,
+    limit: Union[Unset, None, float] = UNSET,
+    order_by: Union[Unset, None, ListSyncOrderBy] = ListSyncOrderBy.ID,
+) -> Optional[Union[Any, ListSyncResponse200, ValidateErrorJSON]]:
+    """List Syncs
+
+     List all the syncs in the current workspace
+
+    Args:
+        slug (Union[Unset, None, str]):
+        model_id (Union[Unset, None, float]):
+        after (Union[Unset, None, datetime.datetime]):
+        before (Union[Unset, None, datetime.datetime]):
+        limit (Union[Unset, None, float]):
+        order_by (Union[Unset, None, ListSyncOrderBy]):  Default: ListSyncOrderBy.ID.
+
+    Returns:
+        Response[Union[Any, ListSyncResponse200, ValidateErrorJSON]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        client=client,
+        slug=slug,
+        model_id=model_id,
+        after=after,
+        before=before,
+        limit=limit,
+        order_by=order_by,
+    )

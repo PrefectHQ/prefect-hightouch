@@ -2,7 +2,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.destination import Destination
 from ...types import Response
@@ -152,3 +154,26 @@ async def asyncio(
             client=client,
         )
     ).parsed
+
+
+@task(name="GetDestination")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    destination_id: float,
+) -> Optional[Union[Any, Destination]]:
+    """Get Destination
+
+     Retrieve a destination based on its Hightouch ID
+
+    Args:
+        destination_id (float):
+
+    Returns:
+        Response[Union[Any, Destination]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        destination_id=destination_id,
+        client=client,
+    )

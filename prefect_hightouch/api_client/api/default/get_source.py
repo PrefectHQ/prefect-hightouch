@@ -2,7 +2,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.source import Source
 from ...models.validate_error_json import ValidateErrorJSON
@@ -159,3 +161,26 @@ async def asyncio(
             client=client,
         )
     ).parsed
+
+
+@task(name="GetSource")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    source_id: float,
+) -> Optional[Union[Any, Source, ValidateErrorJSON]]:
+    """Get Source
+
+     Retrieve source from source ID
+
+    Args:
+        source_id (float):
+
+    Returns:
+        Response[Union[Any, Source, ValidateErrorJSON]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        source_id=source_id,
+        client=client,
+    )

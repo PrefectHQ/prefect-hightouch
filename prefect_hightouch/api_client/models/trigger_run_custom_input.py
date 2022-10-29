@@ -12,47 +12,47 @@ class TriggerRunCustomInput:
     """The input of a trigger action to run syncs based on sync ID, slug or other filters
 
     Attributes:
-        sync_slug (Union[Unset, str]): Trigger run based on sync slug
-        sync_id (Union[Unset, str]): Trigger run based on sync id
         full_resync (Union[Unset, bool]): Whether to resync all the rows in the query (i.e. ignoring previously
             synced rows). Default: True.
+        sync_id (Union[Unset, str]): Trigger run based on sync id
+        sync_slug (Union[Unset, str]): Trigger run based on sync slug
     """
 
-    sync_slug: Union[Unset, str] = UNSET
-    sync_id: Union[Unset, str] = UNSET
     full_resync: Union[Unset, bool] = True
+    sync_id: Union[Unset, str] = UNSET
+    sync_slug: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        sync_slug = self.sync_slug
-        sync_id = self.sync_id
         full_resync = self.full_resync
+        sync_id = self.sync_id
+        sync_slug = self.sync_slug
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if sync_slug is not UNSET:
-            field_dict["syncSlug"] = sync_slug
-        if sync_id is not UNSET:
-            field_dict["syncId"] = sync_id
         if full_resync is not UNSET:
             field_dict["fullResync"] = full_resync
+        if sync_id is not UNSET:
+            field_dict["syncId"] = sync_id
+        if sync_slug is not UNSET:
+            field_dict["syncSlug"] = sync_slug
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        sync_slug = d.pop("syncSlug", UNSET)
+        full_resync = d.pop("fullResync", UNSET)
 
         sync_id = d.pop("syncId", UNSET)
 
-        full_resync = d.pop("fullResync", UNSET)
+        sync_slug = d.pop("syncSlug", UNSET)
 
         trigger_run_custom_input = cls(
-            sync_slug=sync_slug,
-            sync_id=sync_id,
             full_resync=full_resync,
+            sync_id=sync_id,
+            sync_slug=sync_slug,
         )
 
         trigger_run_custom_input.additional_properties = d

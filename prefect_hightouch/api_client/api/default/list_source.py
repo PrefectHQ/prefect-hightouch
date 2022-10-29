@@ -2,7 +2,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.list_source_order_by import ListSourceOrderBy
 from ...models.list_source_response_200 import ListSourceResponse200
@@ -210,3 +212,35 @@ async def asyncio(
             order_by=order_by,
         )
     ).parsed
+
+
+@task(name="ListSource")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    name: Union[Unset, None, str] = UNSET,
+    slug: Union[Unset, None, str] = UNSET,
+    limit: Union[Unset, None, float] = UNSET,
+    order_by: Union[Unset, None, ListSourceOrderBy] = ListSourceOrderBy.ID,
+) -> Optional[Union[Any, ListSourceResponse200]]:
+    """List Sources
+
+     List all the sources in the current workspace
+
+    Args:
+        name (Union[Unset, None, str]):
+        slug (Union[Unset, None, str]):
+        limit (Union[Unset, None, float]):
+        order_by (Union[Unset, None, ListSourceOrderBy]):  Default: ListSourceOrderBy.ID.
+
+    Returns:
+        Response[Union[Any, ListSourceResponse200]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        client=client,
+        name=name,
+        slug=slug,
+        limit=limit,
+        order_by=order_by,
+    )

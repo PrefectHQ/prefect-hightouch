@@ -2,7 +2,9 @@ from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from prefect import task
 
+from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.trigger_run_input import TriggerRunInput
 from ...models.trigger_run_output import TriggerRunOutput
@@ -188,3 +190,32 @@ async def asyncio(
             json_body=json_body,
         )
     ).parsed
+
+
+@task(name="TriggerRun")
+async def asyncio_task(
+    hightouch_credentials: HightouchCredentials,
+    sync_id: str,
+    json_body: TriggerRunInput,
+) -> Optional[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
+    """Trigger Sync
+
+     Trigger a new run for the given sync.
+
+    If a run is already in progress, this queues a sync run that will get
+    executed immediately after the current run completes.
+
+    Args:
+        sync_id (str):
+        json_body (TriggerRunInput): The input of a trigger action to run syncs
+
+    Returns:
+        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
+    """
+
+    client = hightouch_credentials.get_client()
+    return await asyncio(
+        sync_id=sync_id,
+        client=client,
+        json_body=json_body,
+    )

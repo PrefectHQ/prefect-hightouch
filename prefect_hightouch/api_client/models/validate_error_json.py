@@ -12,25 +12,25 @@ T = TypeVar("T", bound="ValidateErrorJSON")
 class ValidateErrorJSON:
     """
     Attributes:
-        message (ValidateErrorJSONMessage):
         details (ValidateErrorJSONDetails):
+        message (ValidateErrorJSONMessage):
     """
 
-    message: ValidateErrorJSONMessage
     details: ValidateErrorJSONDetails
+    message: ValidateErrorJSONMessage
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        message = self.message.value
-
         details = self.details.to_dict()
+
+        message = self.message.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "message": message,
                 "details": details,
+                "message": message,
             }
         )
 
@@ -39,13 +39,13 @@ class ValidateErrorJSON:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        message = ValidateErrorJSONMessage(d.pop("message"))
-
         details = ValidateErrorJSONDetails.from_dict(d.pop("details"))
 
+        message = ValidateErrorJSONMessage(d.pop("message"))
+
         validate_error_json = cls(
-            message=message,
             details=details,
+            message=message,
         )
 
         validate_error_json.additional_properties = d

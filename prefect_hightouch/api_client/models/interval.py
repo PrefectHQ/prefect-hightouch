@@ -11,25 +11,24 @@ T = TypeVar("T", bound="Interval")
 class Interval:
     """
     Attributes:
-        unit (IntervalUnit):
         quantity (float):
+        unit (IntervalUnit):
     """
 
-    unit: IntervalUnit
     quantity: float
+    unit: IntervalUnit
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        unit = self.unit.value
-
         quantity = self.quantity
+        unit = self.unit.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "unit": unit,
                 "quantity": quantity,
+                "unit": unit,
             }
         )
 
@@ -38,13 +37,13 @@ class Interval:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        unit = IntervalUnit(d.pop("unit"))
-
         quantity = d.pop("quantity")
 
+        unit = IntervalUnit(d.pop("unit"))
+
         interval = cls(
-            unit=unit,
             quantity=quantity,
+            unit=unit,
         )
 
         interval.additional_properties = d

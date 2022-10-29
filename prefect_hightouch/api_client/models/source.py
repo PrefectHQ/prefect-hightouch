@@ -15,12 +15,6 @@ class Source:
     a Hightouch data pipeline.
 
         Attributes:
-            id (str): The source's id
-            name (str): The source's name
-            slug (str): The source's slug
-            workspace_id (str): The id of the workspace that the source belongs to
-            created_at (datetime.datetime): The timestamp when the source was created
-            updated_at (datetime.datetime): The timestamp when the source was last updated
             configuration (SourceConfiguration): The source's configuration. This specifies general metadata about sources,
                 like connection details
                 Hightouch will use this configuration to connect to underlying source.
@@ -29,44 +23,50 @@ class Source:
 
                 Consumers should NOT make assumptions on the contents of the
                 configuration. It may change as Hightouch updates its internal code.
+            created_at (datetime.datetime): The timestamp when the source was created
+            id (str): The source's id
+            name (str): The source's name
+            slug (str): The source's slug
             type (str): The source's type (e.g. snowflake or postgres).
+            updated_at (datetime.datetime): The timestamp when the source was last updated
+            workspace_id (str): The id of the workspace that the source belongs to
     """
 
+    configuration: SourceConfiguration
+    created_at: datetime.datetime
     id: str
     name: str
     slug: str
-    workspace_id: str
-    created_at: datetime.datetime
-    updated_at: datetime.datetime
-    configuration: SourceConfiguration
     type: str
+    updated_at: datetime.datetime
+    workspace_id: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        configuration = self.configuration.to_dict()
+
+        created_at = self.created_at.isoformat()
+
         id = self.id
         name = self.name
         slug = self.slug
-        workspace_id = self.workspace_id
-        created_at = self.created_at.isoformat()
-
+        type = self.type
         updated_at = self.updated_at.isoformat()
 
-        configuration = self.configuration.to_dict()
-
-        type = self.type
+        workspace_id = self.workspace_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "configuration": configuration,
+                "createdAt": created_at,
                 "id": id,
                 "name": name,
                 "slug": slug,
-                "workspaceId": workspace_id,
-                "createdAt": created_at,
-                "updatedAt": updated_at,
-                "configuration": configuration,
                 "type": type,
+                "updatedAt": updated_at,
+                "workspaceId": workspace_id,
             }
         )
 
@@ -75,31 +75,31 @@ class Source:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        configuration = SourceConfiguration.from_dict(d.pop("configuration"))
+
+        created_at = isoparse(d.pop("createdAt"))
+
         id = d.pop("id")
 
         name = d.pop("name")
 
         slug = d.pop("slug")
 
-        workspace_id = d.pop("workspaceId")
-
-        created_at = isoparse(d.pop("createdAt"))
+        type = d.pop("type")
 
         updated_at = isoparse(d.pop("updatedAt"))
 
-        configuration = SourceConfiguration.from_dict(d.pop("configuration"))
-
-        type = d.pop("type")
+        workspace_id = d.pop("workspaceId")
 
         source = cls(
+            configuration=configuration,
+            created_at=created_at,
             id=id,
             name=name,
             slug=slug,
-            workspace_id=workspace_id,
-            created_at=created_at,
-            updated_at=updated_at,
-            configuration=configuration,
             type=type,
+            updated_at=updated_at,
+            workspace_id=workspace_id,
         )
 
         source.additional_properties = d

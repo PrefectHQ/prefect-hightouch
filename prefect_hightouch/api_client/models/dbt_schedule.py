@@ -12,28 +12,28 @@ T = TypeVar("T", bound="DBTSchedule")
 class DBTSchedule:
     """
     Attributes:
-        dbt_credential_id (str):
         account (DBTScheduleAccount):
+        dbt_credential_id (str):
         job (DBTScheduleJob):
     """
 
-    dbt_credential_id: str
     account: DBTScheduleAccount
+    dbt_credential_id: str
     job: DBTScheduleJob
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        dbt_credential_id = self.dbt_credential_id
         account = self.account.to_dict()
 
+        dbt_credential_id = self.dbt_credential_id
         job = self.job.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "dbtCredentialId": dbt_credential_id,
                 "account": account,
+                "dbtCredentialId": dbt_credential_id,
                 "job": job,
             }
         )
@@ -43,15 +43,15 @@ class DBTSchedule:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        dbt_credential_id = d.pop("dbtCredentialId")
-
         account = DBTScheduleAccount.from_dict(d.pop("account"))
+
+        dbt_credential_id = d.pop("dbtCredentialId")
 
         job = DBTScheduleJob.from_dict(d.pop("job"))
 
         dbt_schedule = cls(
-            dbt_credential_id=dbt_credential_id,
             account=account,
+            dbt_credential_id=dbt_credential_id,
             job=job,
         )
 
