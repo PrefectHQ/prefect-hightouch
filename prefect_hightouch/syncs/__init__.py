@@ -1,19 +1,5 @@
-# This module was auto-generated using prefect-collection-generator so
-# manually editing this file is not recommended. If this module
-# is outdated, rerun scripts/generate.py.
+# This file was auto-generated using prefect-collection-generator,
+# However, this file will not be overwritten so freely modify imports
+# below, as to override defaults or expose other imports.
 
-from prefect_hightouch.api_client.api.default.get_sync import (  # noqa: F401
-    asyncio_task as get_sync,
-)
-from prefect_hightouch.api_client.api.default.list_sync import (  # noqa: F401
-    asyncio_task as list_sync,
-)
-from prefect_hightouch.api_client.api.default.list_sync_runs import (  # noqa: F401
-    asyncio_task as list_sync_runs,
-)
-from prefect_hightouch.api_client.api.default.trigger_run import (  # noqa: F401
-    asyncio_task as trigger_run,
-)
-from prefect_hightouch.api_client.api.default.trigger_run_custom import (  # noqa: F401
-    asyncio_task as trigger_run_custom,
-)
+from .default import *  # noqa: F401, F403

@@ -1,4 +1,1 @@
-::: prefect_hightouch.destinations
-    selection:
-      members:
-        - _generated
+::: prefect_hightouch.api_client.api.default.get_destination

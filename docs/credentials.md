@@ -1,4 +1,1 @@
-::: prefect_hightouch.credentials
-    selection:
-      members:
-        - _generated
+::: prefect_hightouch.credentials.default

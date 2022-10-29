@@ -1,1 +1,1 @@
-::: prefect_hightouch.api_client
+::: prefect_hightouch.api_client.models
