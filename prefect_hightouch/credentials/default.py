@@ -30,7 +30,7 @@ class HightouchCredentials(Block):
     """
 
     _block_type_name = "Hightouch Credentials"
-    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/46tBvip09DRXFuFQBm6mHW/9c03ce91d396006a97d5efe0f718e4cc/hightouch.png?h=250"  # noqa
+    # _logo_url = "<LOGO_URL_HERE>"  # noqa
 
     token: SecretStr = Field(default=..., description="Token used for authentication.")
     timeout: float = Field(

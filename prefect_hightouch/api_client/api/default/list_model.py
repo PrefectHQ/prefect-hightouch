@@ -1,8 +1,9 @@
+import functools
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Callable, Dict, Optional, TypeVar, Union, cast
 
 import httpx
-from prefect import task
+from typing_extensions import Concatenate, ParamSpec
 
 from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
@@ -11,9 +12,33 @@ from ...models.list_model_response_200 import ListModelResponse200
 from ...models.validate_error_json import ValidateErrorJSON
 from ...types import UNSET, Response, Unset
 
+C = ParamSpec("C")  # client function
+T = ParamSpec("T")  # task function
+R = TypeVar("R")  # The return type of the API function
+
+
+def _wrap_request(
+    client_fn: Callable[Concatenate[AuthenticatedClient, C], R]
+) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
+    def wrap(task_fn: Callable[T, R]) -> Callable[T, R]:
+        @functools.wraps(task_fn)
+        async def run(*args: T.args, **kwargs: T.kwargs) -> R:
+            hightouch_credentials = None
+            if "hightouch_credentials" in kwargs:
+                hightouch_credentials = kwargs.pop("hightouch_credentials")
+                input_args = args
+            else:
+                hightouch_credentials = args[0]
+                input_args = args[1:]
+            kwargs["client"] = hightouch_credentials.get_client()
+            return await client_fn(*input_args, **kwargs)
+
+        return run
+
+    return wrap
+
 
 def _get_kwargs(
-    *,
     client: AuthenticatedClient,
     name: Union[Unset, None, str] = UNSET,
     slug: Union[Unset, None, str] = UNSET,
@@ -82,7 +107,6 @@ def _build_response(
 
 
 def sync_detailed(
-    *,
     client: AuthenticatedClient,
     name: Union[Unset, None, str] = UNSET,
     slug: Union[Unset, None, str] = UNSET,
@@ -120,7 +144,6 @@ def sync_detailed(
 
 
 def sync(
-    *,
     client: AuthenticatedClient,
     name: Union[Unset, None, str] = UNSET,
     slug: Union[Unset, None, str] = UNSET,
@@ -151,7 +174,6 @@ def sync(
 
 
 async def asyncio_detailed(
-    *,
     client: AuthenticatedClient,
     name: Union[Unset, None, str] = UNSET,
     slug: Union[Unset, None, str] = UNSET,
@@ -187,7 +209,6 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    *,
     client: AuthenticatedClient,
     name: Union[Unset, None, str] = UNSET,
     slug: Union[Unset, None, str] = UNSET,
@@ -217,35 +238,3 @@ async def asyncio(
             order_by=order_by,
         )
     ).parsed
-
-
-@task(name="ListModel")
-async def asyncio_task(
-    hightouch_credentials: HightouchCredentials,
-    name: Union[Unset, None, str] = UNSET,
-    slug: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, float] = UNSET,
-    order_by: Union[Unset, None, ListModelOrderBy] = ListModelOrderBy.ID,
-) -> Optional[Union[Any, ListModelResponse200, ValidateErrorJSON]]:
-    """List Models
-
-     List all the models in the current workspace
-
-    Args:
-        name (Union[Unset, None, str]):
-        slug (Union[Unset, None, str]):
-        limit (Union[Unset, None, float]):
-        order_by (Union[Unset, None, ListModelOrderBy]):  Default: ListModelOrderBy.ID.
-
-    Returns:
-        Response[Union[Any, ListModelResponse200, ValidateErrorJSON]]
-    """
-
-    client = hightouch_credentials.get_client()
-    return await asyncio(
-        client=client,
-        name=name,
-        slug=slug,
-        limit=limit,
-        order_by=order_by,
-    )

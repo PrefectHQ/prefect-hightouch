@@ -54,7 +54,7 @@ nav:
     - Models: models.md
     - Sources: sources.md
     - Credentials: credentials.md
-
+    - API Client: api_client.md
     - API Models:
         - CronSchedule: models/cron_schedule.md
         - DbtSchedule: models/dbt_schedule.md
@@ -102,4 +102,4 @@ nav:
         - ValidateErrorJsonMessage: models/validate_error_json_message.md
         - VisualCronSchedule: models/visual_cron_schedule.md
         - VisualCronScheduleExpressionsItem: models/visual_cron_schedule_expressions_item.md
-        
+    

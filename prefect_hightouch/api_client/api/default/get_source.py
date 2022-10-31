@@ -1,8 +1,9 @@
+import functools
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Callable, Dict, Optional, TypeVar, Union, cast
 
 import httpx
-from prefect import task
+from typing_extensions import Concatenate, ParamSpec
 
 from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
@@ -10,11 +11,35 @@ from ...models.source import Source
 from ...models.validate_error_json import ValidateErrorJSON
 from ...types import Response
 
+C = ParamSpec("C")  # client function
+T = ParamSpec("T")  # task function
+R = TypeVar("R")  # The return type of the API function
+
+
+def _wrap_request(
+    client_fn: Callable[Concatenate[AuthenticatedClient, C], R]
+) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
+    def wrap(task_fn: Callable[T, R]) -> Callable[T, R]:
+        @functools.wraps(task_fn)
+        async def run(*args: T.args, **kwargs: T.kwargs) -> R:
+            hightouch_credentials = None
+            if "hightouch_credentials" in kwargs:
+                hightouch_credentials = kwargs.pop("hightouch_credentials")
+                input_args = args
+            else:
+                hightouch_credentials = args[0]
+                input_args = args[1:]
+            kwargs["client"] = hightouch_credentials.get_client()
+            return await client_fn(*input_args, **kwargs)
+
+        return run
+
+    return wrap
+
 
 def _get_kwargs(
-    source_id: float,
-    *,
     client: AuthenticatedClient,
+    source_id: float,
 ) -> Dict[str, Any]:
     url = "{}/sources/{sourceId}".format(client.base_url, sourceId=source_id)
 
@@ -62,9 +87,8 @@ def _build_response(
 
 
 def sync_detailed(
-    source_id: float,
-    *,
     client: AuthenticatedClient,
+    source_id: float,
 ) -> Response[Union[Any, Source, ValidateErrorJSON]]:
     """Get Source
 
@@ -91,9 +115,8 @@ def sync_detailed(
 
 
 def sync(
-    source_id: float,
-    *,
     client: AuthenticatedClient,
+    source_id: float,
 ) -> Optional[Union[Any, Source, ValidateErrorJSON]]:
     """Get Source
 
@@ -113,9 +136,8 @@ def sync(
 
 
 async def asyncio_detailed(
-    source_id: float,
-    *,
     client: AuthenticatedClient,
+    source_id: float,
 ) -> Response[Union[Any, Source, ValidateErrorJSON]]:
     """Get Source
 
@@ -140,9 +162,8 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    source_id: float,
-    *,
     client: AuthenticatedClient,
+    source_id: float,
 ) -> Optional[Union[Any, Source, ValidateErrorJSON]]:
     """Get Source
 
@@ -161,26 +182,3 @@ async def asyncio(
             client=client,
         )
     ).parsed
-
-
-@task(name="GetSource")
-async def asyncio_task(
-    hightouch_credentials: HightouchCredentials,
-    source_id: float,
-) -> Optional[Union[Any, Source, ValidateErrorJSON]]:
-    """Get Source
-
-     Retrieve source from source ID
-
-    Args:
-        source_id (float):
-
-    Returns:
-        Response[Union[Any, Source, ValidateErrorJSON]]
-    """
-
-    client = hightouch_credentials.get_client()
-    return await asyncio(
-        source_id=source_id,
-        client=client,
-    )

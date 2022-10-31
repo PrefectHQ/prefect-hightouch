@@ -1,1 +1,1 @@
-::: prefect_hightouch.destinations
+::: prefect_hightouch.destinations.default

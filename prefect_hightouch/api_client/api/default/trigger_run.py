@@ -1,8 +1,9 @@
+import functools
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Callable, Dict, Optional, TypeVar, Union, cast
 
 import httpx
-from prefect import task
+from typing_extensions import Concatenate, ParamSpec
 
 from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
@@ -11,11 +12,35 @@ from ...models.trigger_run_output import TriggerRunOutput
 from ...models.validate_error_json import ValidateErrorJSON
 from ...types import Response
 
+C = ParamSpec("C")  # client function
+T = ParamSpec("T")  # task function
+R = TypeVar("R")  # The return type of the API function
+
+
+def _wrap_request(
+    client_fn: Callable[Concatenate[AuthenticatedClient, C], R]
+) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
+    def wrap(task_fn: Callable[T, R]) -> Callable[T, R]:
+        @functools.wraps(task_fn)
+        async def run(*args: T.args, **kwargs: T.kwargs) -> R:
+            hightouch_credentials = None
+            if "hightouch_credentials" in kwargs:
+                hightouch_credentials = kwargs.pop("hightouch_credentials")
+                input_args = args
+            else:
+                hightouch_credentials = args[0]
+                input_args = args[1:]
+            kwargs["client"] = hightouch_credentials.get_client()
+            return await client_fn(*input_args, **kwargs)
+
+        return run
+
+    return wrap
+
 
 def _get_kwargs(
-    sync_id: str,
-    *,
     client: AuthenticatedClient,
+    sync_id: str,
     json_body: TriggerRunInput,
 ) -> Dict[str, Any]:
     url = "{}/syncs/{syncId}/trigger".format(client.base_url, syncId=sync_id)
@@ -67,9 +92,8 @@ def _build_response(
 
 
 def sync_detailed(
-    sync_id: str,
-    *,
     client: AuthenticatedClient,
+    sync_id: str,
     json_body: TriggerRunInput,
 ) -> Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
     """Trigger Sync
@@ -102,9 +126,8 @@ def sync_detailed(
 
 
 def sync(
-    sync_id: str,
-    *,
     client: AuthenticatedClient,
+    sync_id: str,
     json_body: TriggerRunInput,
 ) -> Optional[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
     """Trigger Sync
@@ -130,9 +153,8 @@ def sync(
 
 
 async def asyncio_detailed(
-    sync_id: str,
-    *,
     client: AuthenticatedClient,
+    sync_id: str,
     json_body: TriggerRunInput,
 ) -> Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
     """Trigger Sync
@@ -163,9 +185,8 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    sync_id: str,
-    *,
     client: AuthenticatedClient,
+    sync_id: str,
     json_body: TriggerRunInput,
 ) -> Optional[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
     """Trigger Sync
@@ -190,32 +211,3 @@ async def asyncio(
             json_body=json_body,
         )
     ).parsed
-
-
-@task(name="TriggerRun")
-async def asyncio_task(
-    hightouch_credentials: HightouchCredentials,
-    sync_id: str,
-    json_body: TriggerRunInput,
-) -> Optional[Union[Any, TriggerRunOutput, ValidateErrorJSON]]:
-    """Trigger Sync
-
-     Trigger a new run for the given sync.
-
-    If a run is already in progress, this queues a sync run that will get
-    executed immediately after the current run completes.
-
-    Args:
-        sync_id (str):
-        json_body (TriggerRunInput): The input of a trigger action to run syncs
-
-    Returns:
-        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
-    """
-
-    client = hightouch_credentials.get_client()
-    return await asyncio(
-        sync_id=sync_id,
-        client=client,
-        json_body=json_body,
-    )

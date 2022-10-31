@@ -1,19 +1,44 @@
+import functools
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Callable, Dict, Optional, TypeVar, Union, cast
 
 import httpx
-from prefect import task
+from typing_extensions import Concatenate, ParamSpec
 
 from ....credentials import HightouchCredentials
 from ...client import AuthenticatedClient
 from ...models.model import Model
 from ...types import Response
 
+C = ParamSpec("C")  # client function
+T = ParamSpec("T")  # task function
+R = TypeVar("R")  # The return type of the API function
+
+
+def _wrap_request(
+    client_fn: Callable[Concatenate[AuthenticatedClient, C], R]
+) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
+    def wrap(task_fn: Callable[T, R]) -> Callable[T, R]:
+        @functools.wraps(task_fn)
+        async def run(*args: T.args, **kwargs: T.kwargs) -> R:
+            hightouch_credentials = None
+            if "hightouch_credentials" in kwargs:
+                hightouch_credentials = kwargs.pop("hightouch_credentials")
+                input_args = args
+            else:
+                hightouch_credentials = args[0]
+                input_args = args[1:]
+            kwargs["client"] = hightouch_credentials.get_client()
+            return await client_fn(*input_args, **kwargs)
+
+        return run
+
+    return wrap
+
 
 def _get_kwargs(
-    model_id: float,
-    *,
     client: AuthenticatedClient,
+    model_id: float,
 ) -> Dict[str, Any]:
     url = "{}/models/{modelId}".format(client.base_url, modelId=model_id)
 
@@ -53,9 +78,8 @@ def _build_response(*, response: httpx.Response) -> Response[Union[Any, Model]]:
 
 
 def sync_detailed(
-    model_id: float,
-    *,
     client: AuthenticatedClient,
+    model_id: float,
 ) -> Response[Union[Any, Model]]:
     """Get Model
 
@@ -82,9 +106,8 @@ def sync_detailed(
 
 
 def sync(
-    model_id: float,
-    *,
     client: AuthenticatedClient,
+    model_id: float,
 ) -> Optional[Union[Any, Model]]:
     """Get Model
 
@@ -104,9 +127,8 @@ def sync(
 
 
 async def asyncio_detailed(
-    model_id: float,
-    *,
     client: AuthenticatedClient,
+    model_id: float,
 ) -> Response[Union[Any, Model]]:
     """Get Model
 
@@ -131,9 +153,8 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    model_id: float,
-    *,
     client: AuthenticatedClient,
+    model_id: float,
 ) -> Optional[Union[Any, Model]]:
     """Get Model
 
@@ -152,26 +173,3 @@ async def asyncio(
             client=client,
         )
     ).parsed
-
-
-@task(name="GetModel")
-async def asyncio_task(
-    hightouch_credentials: HightouchCredentials,
-    model_id: float,
-) -> Optional[Union[Any, Model]]:
-    """Get Model
-
-     Retrieve models from model ID
-
-    Args:
-        model_id (float):
-
-    Returns:
-        Response[Union[Any, Model]]
-    """
-
-    client = hightouch_credentials.get_client()
-    return await asyncio(
-        model_id=model_id,
-        client=client,
-    )
