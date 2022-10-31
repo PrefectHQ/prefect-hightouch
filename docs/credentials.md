@@ -1,1 +1,1 @@
-::: prefect_hightouch.credentials.default
+::: prefect_hightouch.credentials

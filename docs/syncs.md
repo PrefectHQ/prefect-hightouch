@@ -1,1 +1,2 @@
 ::: prefect_hightouch.syncs
+::: prefect_hightouch.api_client.api.default.get_sync

@@ -39,7 +39,7 @@ def _parse_response(
 ) -> Optional[
     Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]
 ]:
-    if response.status_code == 200:
+    if response.status_code == HTTPStatus.OK:
 
         def _parse_response_200(
             data: object,
@@ -61,13 +61,13 @@ def _parse_response(
         response_200 = _parse_response_200(response.json())
 
         return response_200
-    if response.status_code == 400:
+    if response.status_code == HTTPStatus.BAD_REQUEST:
         response_400 = cast(Any, None)
         return response_400
-    if response.status_code == 401:
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = cast(Any, None)
         return response_401
-    if response.status_code == 422:
+    if response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
         response_422 = ValidateErrorJSON.from_dict(response.json())
 
         return response_422
