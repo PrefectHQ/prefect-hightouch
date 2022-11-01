@@ -50,11 +50,7 @@ watch:
 nav:
     - Home: index.md
     - Syncs: syncs.md
-    - Destinations: destinations.md
-    - Models: models.md
-    - Sources: sources.md
     - Credentials: credentials.md
-
     - API Models:
         - CronSchedule: models/cron_schedule.md
         - DbtSchedule: models/dbt_schedule.md
