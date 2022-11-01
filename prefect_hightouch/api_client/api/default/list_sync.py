@@ -85,6 +85,8 @@ def _parse_response(
 def _build_response(
     *, response: httpx.Response
 ) -> Response[Union[Any, ListSyncResponse200, ValidateErrorJSON]]:
+    response.raise_for_status()
+
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -209,10 +211,8 @@ async def asyncio_detailed(
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
         response = await _client.request(**kwargs)
-    
-    built_response = _build_response(response=response)
-    print(built_response)
-    return built_response
+
+    return _build_response(response=response)
 
 
 async def asyncio(

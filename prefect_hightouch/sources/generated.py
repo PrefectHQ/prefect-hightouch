@@ -11,12 +11,13 @@ REST schema, used for interacting with sources.
 # 3. hide the generated function in `docs/sources.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-01T00:16:53.465313
+# Updated at: 2022-11-01T03:35:04.151191
 
+import typing
 
 from prefect import task
 
-from prefect_hightouch.api_client import types
+from prefect_hightouch.api_client import models as api_models
 from prefect_hightouch.api_client.api import _execute_endpoint
 from prefect_hightouch.api_client.api.default.get_source import (
     asyncio as _get_source_endpoint,
@@ -28,24 +29,25 @@ from prefect_hightouch.api_client.api.default.list_source import (
 
 @task
 @_execute_endpoint(_list_source_endpoint)
-async def list_source(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def list_source(*args, **kwargs) -> typing.List[api_models.source.Source]:
     """
     List all the sources in the current workspace.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        name (Optional[str]):
+        name (Optional[str]]):
             Filter based on name.
-        slug (Optional[str]):
+        slug (Optional[str]]):
             Filter based on slug.
-        limit (Optional[str]):
+        limit (Optional[float]]):
             Limit the number of object it returns.
-        order_by (str):
+        order_by (Optional[models.list_source_order_by.ListSourceOrderBy]]):
             Specify the order.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        typing.List[api_models.source.Source]:
+        - `data: List`</br>
 
     <h4>API Endpoint:</h4>
     `/sources`
@@ -62,18 +64,26 @@ async def list_source(*args, **kwargs) -> types.Response:  # pragma: no cover
 
 @task
 @_execute_endpoint(_get_source_endpoint)
-async def get_source(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def get_source(*args, **kwargs) -> api_models.source.Source:
     """
     Retrieve source from source ID.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        source_id (str):
-            The id of the source.
+        source_id (float):
+            Source ID used in formatting the endpoint URL.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.source.Source:
+        - `id: str`</br>
+        - `name: str`</br>
+        - `slug: str`</br>
+        - `workspace_id: str`</br>
+        - `created_at: str`</br>
+        - `updated_at: str`</br>
+        - `configuration: Dict`</br>
+        - `type: str`</br>
 
     <h4>API Endpoint:</h4>
     `/sources/{source_id}`

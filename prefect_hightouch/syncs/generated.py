@@ -11,12 +11,13 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-01T00:16:53.466238
+# Updated at: 2022-11-01T03:35:04.156736
 
+import typing
 
 from prefect import task
 
-from prefect_hightouch.api_client import types
+from prefect_hightouch.api_client import models as api_models
 from prefect_hightouch.api_client.api import _execute_endpoint
 from prefect_hightouch.api_client.api.default.get_sync import (
     asyncio as _get_sync_endpoint,
@@ -37,28 +38,29 @@ from prefect_hightouch.api_client.api.default.trigger_run_custom import (
 
 @task
 @_execute_endpoint(_list_sync_endpoint)
-async def list_sync(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
     """
     List all the syncs in the current workspace.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        slug (Optional[str]):
+        slug (Optional[str]]):
             Filter based on slug.
-        model_id (Optional[str]):
+        model_id (Optional[float]]):
             Filter based on modelId.
-        after (Optional[str]):
+        after (Optional[datetime.datetime]]):
             Select syncs that were run after given time.
-        before (Optional[str]):
+        before (Optional[datetime.datetime]]):
             Select syncs that were run before given time.
-        limit (Optional[str]):
+        limit (Optional[float]]):
             Limit the number of object it returns. Default is 100.
-        order_by (str):
+        order_by (Optional[models.list_sync_order_by.ListSyncOrderBy]]):
             Specify the order.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        typing.List[api_models.sync.Sync]:
+        - `data: List`</br>
 
     <h4>API Endpoint:</h4>
     `/syncs`
@@ -76,25 +78,26 @@ async def list_sync(*args, **kwargs) -> types.Response:  # pragma: no cover
 
 @task
 @_execute_endpoint(_trigger_run_custom_endpoint)
-async def trigger_run_custom(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def trigger_run_custom(
+    *args, **kwargs
+) -> api_models.trigger_run_output.TriggerRunOutput:
     """
     Trigger a new run globally based on sync id or sync slug  If a run is already in
     progress, this queues a sync run that will get executed immediately after
     the current run completes.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        sync_slug (Optional[str]):
-            Trigger run based on sync slug.
-        sync_id (Optional[str]):
-            Trigger run based on sync id.
-        full_resync (bool):
-            Whether to resync all the rows in the query (i.e. ignoring previously
-            synced rows).
+        json_body (models.trigger_run_custom_input.TriggerRunCustomInput):
+            The input of a trigger action to run syncs based on sync ID, slug or
+            other filters.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.trigger_run_output.TriggerRunOutput:
+        - `id: str`</br>
+        - `message: str`</br>
+        - `details: Dict`</br>
 
     <h4>API Endpoint:</h4>
     `/syncs/trigger`
@@ -112,18 +115,32 @@ async def trigger_run_custom(*args, **kwargs) -> types.Response:  # pragma: no c
 
 @task
 @_execute_endpoint(_get_sync_endpoint)
-async def get_sync(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
     """
     Retrieve sync from sync ID.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        sync_id (str):
-            The id of the sync.
+        sync_id (float):
+            Sync ID used in formatting the endpoint URL.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.sync.Sync:
+        - `id: str`</br>
+        - `slug: str`</br>
+        - `workspace_id: str`</br>
+        - `created_at: str`</br>
+        - `updated_at: str`</br>
+        - `destination_id: str`</br>
+        - `model_id: str`</br>
+        - `configuration: Dict`</br>
+        - `schedule: Dict`</br>
+        - `status: "models.SyncStatus"`</br>
+        - `disabled: bool`</br>
+        - `last_run_at: str`</br>
+        - `referenced_columns: List[str]`</br>
+        - `primary_key: str`</br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}`
@@ -140,32 +157,33 @@ async def get_sync(*args, **kwargs) -> types.Response:  # pragma: no cover
 
 @task
 @_execute_endpoint(_list_sync_runs_endpoint)
-async def list_sync_runs(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.SyncRun]:
     """
     List all sync runs under a sync.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        sync_id (str):
-
-        run_id (Optional[str]):
+        sync_id (float):
+            Sync ID used in formatting the endpoint URL.
+        run_id (Optional[float]]):
             Query for specific run id.
-        limit (Optional[str]):
+        limit (Optional[float]]):
             Limit the number of object it returns. Default is 5.
-        offset (Optional[str]):
+        offset (Optional[float]]):
             Setting offset from result(for pagination).
-        after (Optional[str]):
+        after (Optional[datetime.datetime]]):
             Select sync runs that are started after given timestamp.
-        before (Optional[str]):
+        before (Optional[datetime.datetime]]):
             Select sync runs that are started before certain timestamp.
-        within (Optional[str]):
+        within (Optional[float]]):
             Select sync runs that are started within last given minutes.
-        order_by (str):
+        order_by (Optional[models.list_sync_runs_order_by.ListSyncRunsOrderBy]]):
             Specify the order.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        typing.List[api_models.sync_run.SyncRun]:
+        - `data: List`</br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/runs`
@@ -183,23 +201,25 @@ async def list_sync_runs(*args, **kwargs) -> types.Response:  # pragma: no cover
 
 @task
 @_execute_endpoint(_trigger_run_endpoint)
-async def trigger_run(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def trigger_run(
+    *args, **kwargs
+) -> api_models.trigger_run_output.TriggerRunOutput:
     """
     Trigger a new run for the given sync.  If a run is already in progress, this
     queues a sync run that will get executed immediately after the current run
     completes.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
         sync_id (str):
-            The id of the sync to trigger a run.
-        full_resync (bool):
-            Whether to resync all the rows in the query (i.e. ignoring previously
-            synced rows).
+            Sync ID used in formatting the endpoint URL.
+        json_body (models.trigger_run_input.TriggerRunInput):
+            The input of a trigger action to run syncs.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.trigger_run_output.TriggerRunOutput:
+        - `id: str`</br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/trigger`

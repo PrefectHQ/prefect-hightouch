@@ -76,6 +76,8 @@ def _build_response(
 ) -> Response[
     Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]
 ]:
+    response.raise_for_status()
+
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

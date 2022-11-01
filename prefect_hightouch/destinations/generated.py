@@ -11,12 +11,13 @@ REST schema, used for interacting with destinations.
 # 3. hide the generated function in `docs/destinations.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-01T00:16:53.461454
+# Updated at: 2022-11-01T03:35:04.133358
 
+import typing
 
 from prefect import task
 
-from prefect_hightouch.api_client import types
+from prefect_hightouch.api_client import models as api_models
 from prefect_hightouch.api_client.api import _execute_endpoint
 from prefect_hightouch.api_client.api.default.get_destination import (
     asyncio as _get_destination_endpoint,
@@ -28,24 +29,27 @@ from prefect_hightouch.api_client.api.default.list_destination import (
 
 @task
 @_execute_endpoint(_list_destination_endpoint)
-async def list_destination(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def list_destination(
+    *args, **kwargs
+) -> typing.List[api_models.destination.Destination]:
     """
     List the destinations in the user's workspace.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        name (Optional[str]):
+        name (Optional[str]]):
             Filter based on the destination's name.
-        slug (Optional[str]):
+        slug (Optional[str]]):
             Filter based on destination's slug.
-        limit (Optional[str]):
+        limit (Optional[float]]):
             Limit the number of returned destinations.
-        order_by (str):
+        order_by (Optional[models.list_destination_order_by.ListDestinationOrderBy]]):
             Order the returned destinations.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        typing.List[api_models.destination.Destination]:
+        - `data: List`</br>
 
     <h4>API Endpoint:</h4>
     `/destinations`
@@ -63,18 +67,27 @@ async def list_destination(*args, **kwargs) -> types.Response:  # pragma: no cov
 
 @task
 @_execute_endpoint(_get_destination_endpoint)
-async def get_destination(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def get_destination(*args, **kwargs) -> api_models.destination.Destination:
     """
     Retrieve a destination based on its Hightouch ID.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        destination_id (str):
-            The destination's ID.
+        destination_id (float):
+            Destination ID used in formatting the endpoint URL.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.destination.Destination:
+        - `id: str`</br>
+        - `name: str`</br>
+        - `slug: str`</br>
+        - `workspace_id: str`</br>
+        - `created_at: str`</br>
+        - `updated_at: str`</br>
+        - `type: str`</br>
+        - `configuration: Dict`</br>
+        - `syncs: List[str]`</br>
 
     <h4>API Endpoint:</h4>
     `/destinations/{destination_id}`

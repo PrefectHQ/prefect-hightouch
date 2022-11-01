@@ -11,12 +11,13 @@ REST schema, used for interacting with models.
 # 3. hide the generated function in `docs/models.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-01T00:16:53.463879
+# Updated at: 2022-11-01T03:35:04.145210
 
+import typing
 
 from prefect import task
 
-from prefect_hightouch.api_client import types
+from prefect_hightouch.api_client import models as api_models
 from prefect_hightouch.api_client.api import _execute_endpoint
 from prefect_hightouch.api_client.api.default.get_model import (
     asyncio as _get_model_endpoint,
@@ -28,24 +29,25 @@ from prefect_hightouch.api_client.api.default.list_model import (
 
 @task
 @_execute_endpoint(_list_model_endpoint)
-async def list_model(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def list_model(*args, **kwargs) -> typing.List[api_models.model.Model]:
     """
     List all the models in the current workspace.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        name (Optional[str]):
+        name (Optional[str]]):
             Filter based on name.
-        slug (Optional[str]):
+        slug (Optional[str]]):
             Filter based on slug.
-        limit (Optional[str]):
+        limit (Optional[float]]):
             Limit the number of object it returns. Default is 100.
-        order_by (str):
+        order_by (Optional[models.list_model_order_by.ListModelOrderBy]]):
             Specify the order.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        typing.List[api_models.model.Model]:
+        - `data: List`</br>
 
     <h4>API Endpoint:</h4>
     `/models`
@@ -63,18 +65,35 @@ async def list_model(*args, **kwargs) -> types.Response:  # pragma: no cover
 
 @task
 @_execute_endpoint(_get_model_endpoint)
-async def get_model(*args, **kwargs) -> types.Response:  # pragma: no cover
+async def get_model(*args, **kwargs) -> api_models.model.Model:
     """
     Retrieve models from model ID.
 
     Args:
-        hightouch_credentials ("HightouchCredentials"):
+        hightouch_credentials (HightouchCredentials):
             Credentials to use for authentication with Hightouch.
-        model_id (str):
-            The id of the model.
+        model_id (float):
+            Model ID used in formatting the endpoint URL.
 
     Returns:
-        A Response; use the `parsed` attribute to resolve data as models.
+        api_models.model.Model:
+        - `id: str`</br>
+        - `name: str`</br>
+        - `slug: str`</br>
+        - `workspace_id: str`</br>
+        - `primary_key: str`</br>
+        - `created_at: str`</br>
+        - `updated_at: str`</br>
+        - `source_id: str`</br>
+        - `query_type: str`</br>
+        - `tags: Dict`</br>
+        - `is_schema: bool`</br>
+        - `syncs: List[str]`</br>
+        - `visual: Dict`</br>
+        - `custom: Dict`</br>
+        - `table: Dict`</br>
+        - `dbt: Dict`</br>
+        - `raw: Dict`</br>
 
     <h4>API Endpoint:</h4>
     `/models/{model_id}`

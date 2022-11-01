@@ -5,8 +5,8 @@ from typing import Callable, TypeVar
 
 from typing_extensions import Concatenate, ParamSpec
 
-from ...credentials import HightouchCredentials
-from ..client import AuthenticatedClient
+from prefect_hightouch.api_client.client import AuthenticatedClient
+from prefect_hightouch.credentials import HightouchCredentials
 
 C = ParamSpec("C")  # client function
 T = ParamSpec("T")  # task function

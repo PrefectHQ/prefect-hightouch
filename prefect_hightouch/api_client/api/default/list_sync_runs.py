@@ -89,6 +89,8 @@ def _parse_response(
 def _build_response(
     *, response: httpx.Response
 ) -> Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]:
+    response.raise_for_status()
+
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

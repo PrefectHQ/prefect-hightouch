@@ -43,6 +43,8 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Destinat
 
 
 def _build_response(*, response: httpx.Response) -> Response[Union[Any, Destination]]:
+    response.raise_for_status()
+
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

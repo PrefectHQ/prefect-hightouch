@@ -41,6 +41,8 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Model]]:
 
 
 def _build_response(*, response: httpx.Response) -> Response[Union[Any, Model]]:
+    response.raise_for_status()
+
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
