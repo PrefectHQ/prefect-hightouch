@@ -11,10 +11,8 @@ to perform authenticated interactions with Hightouch.
 # 3. hide the generated function in `docs/.md` under `options`
 
 
-from base64 import b64encode
 from typing import Any, Dict
 
-from httpx import AsyncClient
 from prefect.blocks.core import Block
 from pydantic import Field, SecretStr
 
@@ -78,7 +76,8 @@ class HightouchCredentials(Block):
             example_get_client_flow()
             ```
         """
-        base_url = f"https://api.hightouch.com/api/v1"
+
+        base_url = "https://api.hightouch.com/api/v1"
 
         client_kwargs = self.client_kwargs.copy()
         token = self.token.get_secret_value()
@@ -88,6 +87,6 @@ class HightouchCredentials(Block):
             token=token,
             prefix=prefix,
             timeout=self.timeout,
-            **client_kwargs,
+            **client_kwargs
         )
         return client
