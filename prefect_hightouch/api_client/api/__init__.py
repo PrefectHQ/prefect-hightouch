@@ -16,17 +16,22 @@ R = TypeVar("R")  # The return type of the API function
 def _execute_endpoint(
     endpoint_fn: Callable[Concatenate[AuthenticatedClient, C], R]
 ) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
-    def wrap(task_fn: Callable[T, R]) -> Callable[T, R]:
+    """
+    This decorator:
+    1. replaces the AuthenticatedClient with HightouchCredentials type annotation
+    2. uses the hightouch_credentials to get the client and execute endpoint_fn.
+    """
+
+    def wrap(task_fn: Callable[T, R]) -> Callable[C, R]:
         @functools.wraps(task_fn)
-        async def run(*args: T.args, **kwargs: T.kwargs) -> R:
+        async def run(*args: C.args, **kwargs: C.kwargs) -> R:
             hightouch_credentials = None
             if "hightouch_credentials" in kwargs:
                 hightouch_credentials = kwargs.pop("hightouch_credentials")
-                input_args = args
+                input_args = (hightouch_credentials.get_client(), *args)
             else:
                 hightouch_credentials = args[0]
-                input_args = args[1:]
-            kwargs["client"] = hightouch_credentials.get_client()
+                input_args = (hightouch_credentials.get_client(), *args[1:])
             parsed_response = await endpoint_fn(*input_args, **kwargs)
             if hasattr(parsed_response, "data"):
                 parsed_response = parsed_response.data

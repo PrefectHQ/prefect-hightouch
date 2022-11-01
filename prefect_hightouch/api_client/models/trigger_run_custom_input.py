@@ -41,9 +41,9 @@ class TriggerRunCustomInput(BaseModel):
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        if src_dict is None:
+        if src_dict is None or src_dict is UNSET:
             return {}
-        d = src_dict.copy()
+        d = {k: v if v is not None else UNSET for k, v in src_dict.items()}
         full_resync = d.pop("fullResync", UNSET)
 
         sync_id = d.pop("syncId", UNSET)

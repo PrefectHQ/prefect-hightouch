@@ -2,6 +2,8 @@ from typing import Any, Dict, List, Type, TypeVar
 
 from pydantic import BaseModel, Field
 
+from ..types import UNSET
+
 T = TypeVar("T", bound="DBTScheduleAccount")
 
 
@@ -29,9 +31,9 @@ class DBTScheduleAccount(BaseModel):
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        if src_dict is None:
+        if src_dict is None or src_dict is UNSET:
             return {}
-        d = src_dict.copy()
+        d = {k: v if v is not None else UNSET for k, v in src_dict.items()}
         id = d.pop("id")
 
         dbt_schedule_account = cls(

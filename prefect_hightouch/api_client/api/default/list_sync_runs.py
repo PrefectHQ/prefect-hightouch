@@ -90,6 +90,7 @@ def _build_response(
     *, response: httpx.Response
 ) -> Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]:
     response.raise_for_status()
+    print(response.json())
 
     return Response(
         status_code=HTTPStatus(response.status_code),

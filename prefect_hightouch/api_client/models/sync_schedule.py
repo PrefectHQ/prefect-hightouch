@@ -6,6 +6,7 @@ from ..models.cron_schedule import CronSchedule
 from ..models.dbt_schedule import DBTSchedule
 from ..models.interval_schedule import IntervalSchedule
 from ..models.visual_cron_schedule import VisualCronSchedule
+from ..types import UNSET
 
 T = TypeVar("T", bound="SyncSchedule")
 
@@ -62,9 +63,9 @@ class SyncSchedule(BaseModel):
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        if src_dict is None:
+        if src_dict is None or src_dict is UNSET:
             return {}
-        d = src_dict.copy()
+        d = {k: v if v is not None else UNSET for k, v in src_dict.items()}
 
         def _parse_schedule(
             data: object,
