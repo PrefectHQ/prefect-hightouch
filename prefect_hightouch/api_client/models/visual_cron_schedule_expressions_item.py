@@ -1,23 +1,22 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.record_day_boolean_or_undefined import RecordDayBooleanOrUndefined
 
 T = TypeVar("T", bound="VisualCronScheduleExpressionsItem")
 
 
-@attr.s(auto_attribs=True)
-class VisualCronScheduleExpressionsItem:
+class VisualCronScheduleExpressionsItem(BaseModel):
     """
     Attributes:
         days (RecordDayBooleanOrUndefined): Construct a type with a set of properties K of type T
         time (str):
     """
 
-    days: RecordDayBooleanOrUndefined
-    time: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    days: RecordDayBooleanOrUndefined = None
+    time: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         days = self.days.to_dict()

@@ -1,14 +1,13 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TriggerRunInput")
 
 
-@attr.s(auto_attribs=True)
-class TriggerRunInput:
+class TriggerRunInput(BaseModel):
     """The input of a trigger action to run syncs
 
     Attributes:
@@ -17,7 +16,7 @@ class TriggerRunInput:
     """
 
     full_resync: Union[Unset, bool] = True
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         full_resync = self.full_resync

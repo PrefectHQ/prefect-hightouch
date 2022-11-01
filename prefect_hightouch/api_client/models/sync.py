@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, cast
 
-import attr
 from dateutil.parser import isoparse
+from pydantic import BaseModel, Field
 
 from ..models.sync_configuration import SyncConfiguration
 from ..models.sync_schedule import SyncSchedule
@@ -11,8 +11,7 @@ from ..models.sync_status import SyncStatus
 T = TypeVar("T", bound="Sync")
 
 
-@attr.s(auto_attribs=True)
-class Sync:
+class Sync(BaseModel):
     """Syncs define how data from models are mapped to destinations. Each time a
     sync runs, Hightouch calculates the rows that have changed since the last
     run, and syncs them to Sync's destination.
@@ -48,21 +47,21 @@ class Sync:
             workspace_id (str): The id of the workspace that the sync belongs to
     """
 
-    configuration: SyncConfiguration
-    created_at: datetime.datetime
-    destination_id: str
-    disabled: bool
-    id: str
-    last_run_at: datetime.datetime
-    model_id: str
-    primary_key: str
-    referenced_columns: List[str]
-    schedule: SyncSchedule
-    slug: str
-    status: SyncStatus
-    updated_at: datetime.datetime
-    workspace_id: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    configuration: SyncConfiguration = None
+    created_at: datetime.datetime = None
+    destination_id: str = None
+    disabled: bool = None
+    id: str = None
+    last_run_at: datetime.datetime = None
+    model_id: str = None
+    primary_key: str = None
+    referenced_columns: List[str] = None
+    schedule: SyncSchedule = None
+    slug: str = None
+    status: SyncStatus = None
+    updated_at: datetime.datetime = None
+    workspace_id: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         configuration = self.configuration.to_dict()

@@ -1,4 +1,15 @@
-"""Credential classes used to perform authenticated interactions with Hightouch"""
+"""
+This is a module containing credentials, auto-generated, used
+to perform authenticated interactions with Hightouch.
+"""
+
+# This module was auto-generated using prefect-collection-generator so
+# manually editing this file is not recommended. If this module is outdated
+# rerun scripts/generate.py. To override the default generated output:
+# 1. create a separate module and rewrite the class / function
+# 2. import in `__init__.py`, under the `from .generated import *` line
+# 3. hide the generated function in `docs/.md` under `options`
+
 
 from base64 import b64encode
 from typing import Any, Dict

@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="ModelVisual")
 
 
-@attr.s(auto_attribs=True)
-class ModelVisual:
+class ModelVisual(BaseModel):
     """Visual query, used by audience
 
     Attributes:
@@ -16,11 +15,11 @@ class ModelVisual:
         secondary_label (str):
     """
 
-    filter_: Any
-    parent_id: str
-    primary_label: str
-    secondary_label: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    filter_: Any = None
+    parent_id: str = None
+    primary_label: str = None
+    secondary_label: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         filter_ = self.filter_

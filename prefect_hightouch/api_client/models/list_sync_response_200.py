@@ -1,21 +1,20 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.sync import Sync
 
 T = TypeVar("T", bound="ListSyncResponse200")
 
 
-@attr.s(auto_attribs=True)
-class ListSyncResponse200:
+class ListSyncResponse200(BaseModel):
     """
     Attributes:
         data (List[Sync]):
     """
 
-    data: List[Sync]
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    data: List[Sync] = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         data = []

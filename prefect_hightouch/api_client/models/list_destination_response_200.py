@@ -1,21 +1,20 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.destination import Destination
 
 T = TypeVar("T", bound="ListDestinationResponse200")
 
 
-@attr.s(auto_attribs=True)
-class ListDestinationResponse200:
+class ListDestinationResponse200(BaseModel):
     """
     Attributes:
         data (List[Destination]):
     """
 
-    data: List[Destination]
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    data: List[Destination] = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         data = []

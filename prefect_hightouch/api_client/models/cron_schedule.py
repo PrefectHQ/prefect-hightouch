@@ -1,19 +1,18 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="CronSchedule")
 
 
-@attr.s(auto_attribs=True)
-class CronSchedule:
+class CronSchedule(BaseModel):
     """
     Attributes:
         expression (str):
     """
 
-    expression: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    expression: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         expression = self.expression

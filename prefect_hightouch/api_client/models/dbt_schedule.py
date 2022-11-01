@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.dbt_schedule_account import DBTScheduleAccount
 from ..models.dbt_schedule_job import DBTScheduleJob
@@ -8,8 +8,7 @@ from ..models.dbt_schedule_job import DBTScheduleJob
 T = TypeVar("T", bound="DBTSchedule")
 
 
-@attr.s(auto_attribs=True)
-class DBTSchedule:
+class DBTSchedule(BaseModel):
     """
     Attributes:
         account (DBTScheduleAccount):
@@ -17,10 +16,10 @@ class DBTSchedule:
         job (DBTScheduleJob):
     """
 
-    account: DBTScheduleAccount
-    dbt_credential_id: str
-    job: DBTScheduleJob
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    account: DBTScheduleAccount = None
+    dbt_credential_id: str = None
+    job: DBTScheduleJob = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         account = self.account.to_dict()

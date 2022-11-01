@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="SourceConfiguration")
 
 
-@attr.s(auto_attribs=True)
-class SourceConfiguration:
+class SourceConfiguration(BaseModel):
     """The source's configuration. This specifies general metadata about sources, like connection details
     Hightouch will use this configuration to connect to underlying source.
 
@@ -17,7 +16,7 @@ class SourceConfiguration:
 
     """
 
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
 

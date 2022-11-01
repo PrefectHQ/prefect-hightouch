@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.cron_schedule import CronSchedule
 from ..models.dbt_schedule import DBTSchedule
@@ -10,8 +10,7 @@ from ..models.visual_cron_schedule import VisualCronSchedule
 T = TypeVar("T", bound="SyncSchedule")
 
 
-@attr.s(auto_attribs=True)
-class SyncSchedule:
+class SyncSchedule(BaseModel):
     """The scheduling configuration. It can be triggerd based on several ways:
 
     Interval: the sync will be trigged based on certain interval(minutes/hours/days/weeks)
@@ -27,9 +26,11 @@ class SyncSchedule:
             type (str):
     """
 
-    schedule: Union[CronSchedule, DBTSchedule, IntervalSchedule, VisualCronSchedule]
-    type: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    schedule: Union[
+        CronSchedule, DBTSchedule, IntervalSchedule, VisualCronSchedule
+    ] = None
+    type: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         schedule: Dict[str, Any]

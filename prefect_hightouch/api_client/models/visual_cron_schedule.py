@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.visual_cron_schedule_expressions_item import (
     VisualCronScheduleExpressionsItem,
@@ -9,15 +9,14 @@ from ..models.visual_cron_schedule_expressions_item import (
 T = TypeVar("T", bound="VisualCronSchedule")
 
 
-@attr.s(auto_attribs=True)
-class VisualCronSchedule:
+class VisualCronSchedule(BaseModel):
     """
     Attributes:
         expressions (List[VisualCronScheduleExpressionsItem]):
     """
 
-    expressions: List[VisualCronScheduleExpressionsItem]
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    expressions: List[VisualCronScheduleExpressionsItem] = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         expressions = []

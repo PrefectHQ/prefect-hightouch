@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.validate_error_json_details import ValidateErrorJSONDetails
 from ..models.validate_error_json_message import ValidateErrorJSONMessage
@@ -8,17 +8,16 @@ from ..models.validate_error_json_message import ValidateErrorJSONMessage
 T = TypeVar("T", bound="ValidateErrorJSON")
 
 
-@attr.s(auto_attribs=True)
-class ValidateErrorJSON:
+class ValidateErrorJSON(BaseModel):
     """
     Attributes:
         details (ValidateErrorJSONDetails):
         message (ValidateErrorJSONMessage):
     """
 
-    details: ValidateErrorJSONDetails
-    message: ValidateErrorJSONMessage
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    details: ValidateErrorJSONDetails = None
+    message: ValidateErrorJSONMessage = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         details = self.details.to_dict()

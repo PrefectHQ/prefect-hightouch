@@ -1,21 +1,20 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.interval import Interval
 
 T = TypeVar("T", bound="IntervalSchedule")
 
 
-@attr.s(auto_attribs=True)
-class IntervalSchedule:
+class IntervalSchedule(BaseModel):
     """
     Attributes:
         interval (Interval):
     """
 
-    interval: Interval
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    interval: Interval = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         interval = self.interval.to_dict()

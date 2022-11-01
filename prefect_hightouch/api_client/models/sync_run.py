@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
 from dateutil.parser import isoparse
+from pydantic import BaseModel, Field
 
 from ..models.sync_run_failed_rows import SyncRunFailedRows
 from ..models.sync_run_planned_rows import SyncRunPlannedRows
@@ -13,8 +13,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SyncRun")
 
 
-@attr.s(auto_attribs=True)
-class SyncRun:
+class SyncRun(BaseModel):
     """
     Attributes:
         completion_ratio (float): The completion ratio of sync run, showing the progress of a sync run
@@ -40,18 +39,18 @@ class SyncRun:
         error (Union[Unset, str]): Error message if the sync run didn't finish successfully
     """
 
-    completion_ratio: float
-    created_at: datetime.datetime
-    failed_rows: SyncRunFailedRows
-    finished_at: datetime.datetime
-    id: str
-    planned_rows: SyncRunPlannedRows
-    query_size: float
-    started_at: datetime.datetime
-    status: SyncRunStatus
-    successful_rows: SyncRunSuccessfulRows
+    completion_ratio: float = None
+    created_at: datetime.datetime = None
+    failed_rows: SyncRunFailedRows = None
+    finished_at: datetime.datetime = None
+    id: str = None
+    planned_rows: SyncRunPlannedRows = None
+    query_size: float = None
+    started_at: datetime.datetime = None
+    status: SyncRunStatus = None
+    successful_rows: SyncRunSuccessfulRows = None
     error: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         completion_ratio = self.completion_ratio

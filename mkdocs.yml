@@ -39,7 +39,7 @@ plugins:
             show_submodules: True
             show_root_heading: True
             show_object_full_path: False
-            show_category_heading: True
+            show_category_heading: False
             show_bases: True
             show_signature: False
             heading_level: 1
@@ -54,7 +54,7 @@ nav:
     - Models: models.md
     - Sources: sources.md
     - Credentials: credentials.md
-    - API Client: api_client.md
+
     - API Models:
         - CronSchedule: models/cron_schedule.md
         - DbtSchedule: models/dbt_schedule.md

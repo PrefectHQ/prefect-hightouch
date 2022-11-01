@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="SyncConfiguration")
 
 
-@attr.s(auto_attribs=True)
-class SyncConfiguration:
+class SyncConfiguration(BaseModel):
     """The sync's configuration. This specifies how data is mapped, among other
     configuration.
 
@@ -17,7 +16,7 @@ class SyncConfiguration:
 
     """
 
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
 

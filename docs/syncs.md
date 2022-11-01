@@ -1,1 +1,1 @@
-::: prefect_hightouch.syncs.default
+::: prefect_hightouch.syncs

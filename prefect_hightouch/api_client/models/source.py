@@ -1,16 +1,15 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
 from dateutil.parser import isoparse
+from pydantic import BaseModel, Field
 
 from ..models.source_configuration import SourceConfiguration
 
 T = TypeVar("T", bound="Source")
 
 
-@attr.s(auto_attribs=True)
-class Source:
+class Source(BaseModel):
     """The database or warehouse where your data is stored. The starting point for
     a Hightouch data pipeline.
 
@@ -32,15 +31,15 @@ class Source:
             workspace_id (str): The id of the workspace that the source belongs to
     """
 
-    configuration: SourceConfiguration
-    created_at: datetime.datetime
-    id: str
-    name: str
-    slug: str
-    type: str
-    updated_at: datetime.datetime
-    workspace_id: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    configuration: SourceConfiguration = None
+    created_at: datetime.datetime = None
+    id: str = None
+    name: str = None
+    slug: str = None
+    type: str = None
+    updated_at: datetime.datetime = None
+    workspace_id: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         configuration = self.configuration.to_dict()

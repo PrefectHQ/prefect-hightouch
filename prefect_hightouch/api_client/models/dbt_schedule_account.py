@@ -1,19 +1,18 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="DBTScheduleAccount")
 
 
-@attr.s(auto_attribs=True)
-class DBTScheduleAccount:
+class DBTScheduleAccount(BaseModel):
     """
     Attributes:
         id (str):
     """
 
-    id: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    id: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

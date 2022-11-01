@@ -1,1 +1,1 @@
-::: prefect_hightouch.models.default
+::: prefect_hightouch.models

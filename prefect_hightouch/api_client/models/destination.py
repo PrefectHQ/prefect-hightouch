@@ -1,16 +1,15 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, cast
 
-import attr
 from dateutil.parser import isoparse
+from pydantic import BaseModel, Field
 
 from ..models.destination_configuration import DestinationConfiguration
 
 T = TypeVar("T", bound="Destination")
 
 
-@attr.s(auto_attribs=True)
-class Destination:
+class Destination(BaseModel):
     """The service receiving your data (e.g. Salesforce, Hubspot, Customer.io, or a
     SFTP server)
 
@@ -33,16 +32,16 @@ class Destination:
             workspace_id (str): The id of the workspace that the destination belongs to
     """
 
-    configuration: DestinationConfiguration
-    created_at: datetime.datetime
-    id: str
-    name: str
-    slug: str
-    syncs: List[str]
-    type: str
-    updated_at: datetime.datetime
-    workspace_id: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    configuration: DestinationConfiguration = None
+    created_at: datetime.datetime = None
+    id: str = None
+    name: str = None
+    slug: str = None
+    syncs: List[str] = None
+    type: str = None
+    updated_at: datetime.datetime = None
+    workspace_id: str = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         configuration = self.configuration.to_dict()

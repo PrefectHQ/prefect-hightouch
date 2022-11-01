@@ -2,10 +2,11 @@
 from http import HTTPStatus
 from typing import BinaryIO, Generic, MutableMapping, Optional, Tuple, TypeVar
 
-import attr
+from pydantic import BaseModel
+from pydantic.generics import GenericModel
 
 
-class Unset:
+class Unset(BaseModel):
     def __bool__(self) -> bool:
         return False
 
@@ -15,7 +16,6 @@ UNSET: Unset = Unset()
 FileJsonType = Tuple[Optional[str], BinaryIO, Optional[str]]
 
 
-@attr.s(auto_attribs=True)
 class File:
     """Contains information for file uploads"""
 
@@ -31,8 +31,7 @@ class File:
 T = TypeVar("T")
 
 
-@attr.s(auto_attribs=True)
-class Response(Generic[T]):
+class Response(GenericModel, Generic[T]):
     """A response from an endpoint"""
 
     status_code: HTTPStatus

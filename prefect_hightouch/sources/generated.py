@@ -1,28 +1,33 @@
 """
-This is a module containing tasks for interacting with:
-Hightouch sources
+This is a module containing tasks, auto-generated from the Hightouch
+REST schema, used for interacting with sources.
 """
 
 # This module was auto-generated using prefect-collection-generator so
-# manually editing this file is not recommended. If this module
-# is outdated, rerun scripts/generate.py.
+# manually editing this file is not recommended. If this module is outdated
+# rerun scripts/generate.py. To override the default generated output:
+# 1. create a separate module and rewrite the class / function
+# 2. import in `__init__.py`, under the `from .generated import *` line
+# 3. hide the generated function in `docs/sources.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-10-31T19:39:31.388120
+# Updated at: 2022-11-01T00:16:53.465313
 
 
 from prefect import task
 
-from prefect_hightouch import HightouchCredentials
 from prefect_hightouch.api_client import types
-from prefect_hightouch.api_client.api.default.list_source import _wrap_request
+from prefect_hightouch.api_client.api import _execute_endpoint
+from prefect_hightouch.api_client.api.default.get_source import (
+    asyncio as _get_source_endpoint,
+)
 from prefect_hightouch.api_client.api.default.list_source import (
-    asyncio_detailed as request,
+    asyncio as _list_source_endpoint,
 )
 
 
 @task
-@_wrap_request(request)
+@_execute_endpoint(_list_source_endpoint)
 async def list_source(*args, **kwargs) -> types.Response:  # pragma: no cover
     """
     List all the sources in the current workspace.
@@ -52,11 +57,11 @@ async def list_source(*args, **kwargs) -> types.Response:  # pragma: no cover
     | 400 | Bad request. |
     | 401 | Unauthorized. |
     """  # noqa
-    return await request(*args, **kwargs)
+    ...
 
 
 @task
-@_wrap_request(request)
+@_execute_endpoint(_get_source_endpoint)
 async def get_source(*args, **kwargs) -> types.Response:  # pragma: no cover
     """
     Retrieve source from source ID.
@@ -81,4 +86,4 @@ async def get_source(*args, **kwargs) -> types.Response:  # pragma: no cover
     | 404 | Not found. |
     | 422 | Validation Failed. |
     """  # noqa
-    return await request(*args, **kwargs)
+    ...

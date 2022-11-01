@@ -1,23 +1,22 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..models.interval_unit import IntervalUnit
 
 T = TypeVar("T", bound="Interval")
 
 
-@attr.s(auto_attribs=True)
-class Interval:
+class Interval(BaseModel):
     """
     Attributes:
         quantity (float):
         unit (IntervalUnit):
     """
 
-    quantity: float
-    unit: IntervalUnit
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    quantity: float = None
+    unit: IntervalUnit = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         quantity = self.quantity

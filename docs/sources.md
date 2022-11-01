@@ -1,1 +1,1 @@
-::: prefect_hightouch.sources.default
+::: prefect_hightouch.sources

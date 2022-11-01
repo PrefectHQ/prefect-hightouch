@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="ModelDbt")
 
 
-@attr.s(auto_attribs=True)
-class ModelDbt:
+class ModelDbt(BaseModel):
     """Query that is based on a dbt model
 
     Attributes:
@@ -20,14 +19,14 @@ class ModelDbt:
         schema (str): Name of the schema containing the generated table
     """
 
-    compiled_sql: str
-    database: str
-    dbt_unique_id: str
-    model_id: str
-    name: str
-    raw_sql: str
-    schema: str
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    compiled_sql: str = None
+    database: str = None
+    dbt_unique_id: str = None
+    model_id: str = None
+    name: str = None
+    raw_sql: str = None
+    schema_: str = Field(default=..., alias="schema")
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         compiled_sql = self.compiled_sql

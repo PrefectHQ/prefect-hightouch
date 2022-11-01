@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="SyncRunSuccessfulRows")
 
 
-@attr.s(auto_attribs=True)
-class SyncRunSuccessfulRows:
+class SyncRunSuccessfulRows(BaseModel):
     """The number of rows that were successfully processed by the destination.
 
     Attributes:
@@ -15,10 +14,10 @@ class SyncRunSuccessfulRows:
         removed_count (float): The number of successful removes.
     """
 
-    added_count: float
-    changed_count: float
-    removed_count: float
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    added_count: float = None
+    changed_count: float = None
+    removed_count: float = None
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         added_count = self.added_count

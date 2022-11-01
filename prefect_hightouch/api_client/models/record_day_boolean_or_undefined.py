@@ -1,14 +1,13 @@
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from pydantic import BaseModel, Field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RecordDayBooleanOrUndefined")
 
 
-@attr.s(auto_attribs=True)
-class RecordDayBooleanOrUndefined:
+class RecordDayBooleanOrUndefined(BaseModel):
     """Construct a type with a set of properties K of type T
 
     Attributes:
@@ -28,7 +27,7 @@ class RecordDayBooleanOrUndefined:
     thursday: Union[Unset, bool] = UNSET
     tuesday: Union[Unset, bool] = UNSET
     wednesday: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         friday = self.friday

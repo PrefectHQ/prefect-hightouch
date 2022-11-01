@@ -1,12 +1,11 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="DestinationConfiguration")
 
 
-@attr.s(auto_attribs=True)
-class DestinationConfiguration:
+class DestinationConfiguration(BaseModel):
     """The destination's configuration. This specifies general metadata about destination, like hostname and username.
     Hightouch will be using this configuration to connect to destination.
 
@@ -17,7 +16,7 @@ class DestinationConfiguration:
 
     """
 
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
 

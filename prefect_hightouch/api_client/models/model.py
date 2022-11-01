@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
-import attr
 from dateutil.parser import isoparse
+from pydantic import BaseModel, Field
 
 from ..models.model_custom import ModelCustom
 from ..models.model_dbt import ModelDbt
@@ -15,8 +15,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="Model")
 
 
-@attr.s(auto_attribs=True)
-class Model:
+class Model(BaseModel):
     """The SQL query that pulls data from your source to send to your destination.
     We send your SQL query directly to your source so any SQL that is valid for your source (including functions) is
     valid in Hightouch.
@@ -43,24 +42,24 @@ class Model:
             visual (Union[Unset, ModelVisual]): Visual query, used by audience
     """
 
-    created_at: datetime.datetime
-    id: str
-    is_schema: bool
-    name: str
-    primary_key: str
-    query_type: str
-    slug: str
-    source_id: str
-    syncs: List[str]
-    tags: ModelTags
-    updated_at: datetime.datetime
-    workspace_id: str
+    created_at: datetime.datetime = None
+    id: str = None
+    is_schema: bool = None
+    name: str = None
+    primary_key: str = None
+    query_type: str = None
+    slug: str = None
+    source_id: str = None
+    syncs: List[str] = None
+    tags: ModelTags = None
+    updated_at: datetime.datetime = None
+    workspace_id: str = None
     custom: Union[Unset, ModelCustom] = UNSET
     dbt: Union[Unset, ModelDbt] = UNSET
     raw: Union[Unset, ModelRaw] = UNSET
     table: Union[Unset, ModelTable] = UNSET
     visual: Union[Unset, ModelVisual] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         created_at = self.created_at.isoformat()

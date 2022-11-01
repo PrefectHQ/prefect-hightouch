@@ -1,15 +1,14 @@
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from pydantic import BaseModel, Field
 
 T = TypeVar("T", bound="ModelTags")
 
 
-@attr.s(auto_attribs=True)
-class ModelTags:
+class ModelTags(BaseModel):
     """The tags of the model"""
 
-    additional_properties: Dict[str, str] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, str] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
 
