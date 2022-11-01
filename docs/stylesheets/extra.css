@@ -14,6 +14,14 @@
     padding: 0.5em 1.25em;
 }
 
+.md-typeset table:not([class]) td:nth-of-type(4) {
+    display: none;
+ }
+
+.md-typeset table:not([class]) th:nth-of-type(4) {
+    display: none;
+ }
+    
 /* convenience class to keep lines from breaking
 useful for wrapping table cell text in a span
 to force column width */
