@@ -105,7 +105,7 @@ async def trigger_sync_run_and_wait_for_completion(
     )
     await sync_run_future.result()
 
-    sync_status, sync_metadata = await sync_run_wait_for_completion(
+    sync_status, sync_metadata = await wait_for_sync_run_completion(
         hightouch_credentials=hightouch_credentials,
         sync_id=sync_id,
         max_wait_seconds=max_wait_seconds,
@@ -122,7 +122,7 @@ async def trigger_sync_run_and_wait_for_completion(
 
 
 @flow
-async def sync_run_wait_for_completion(
+async def wait_for_sync_run_completion(
     hightouch_credentials: HightouchCredentials,
     sync_id: str,
     max_wait_seconds: int = 900,
@@ -150,12 +150,12 @@ async def sync_run_wait_for_completion(
         from prefect import flow
 
         from prefect_hightouch import HightouchCredentials
-        from prefect_hightouch.syncs import sync_run_wait_for_completion
+        from prefect_hightouch.syncs import wait_for_sync_run_completion
 
         @flow
         def wait_flow():
             hightouch_credentials = HightouchCredentials.load("hightouch-token")
-            sync_status, sync_metadata = sync_run_wait_for_completion(
+            sync_status, sync_metadata = wait_for_sync_run_completion(
                 hightouch_credentials=hightouch_credentials,
                 sync_id=12345,
                 max_wait_seconds=1800,
