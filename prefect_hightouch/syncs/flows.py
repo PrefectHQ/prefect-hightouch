@@ -98,7 +98,10 @@ async def trigger_sync_run_and_wait_for_completion(
     if sync_status == SyncStatus.SUCCESS:
         return sync_metadata
     else:
-        raise TERMINAL_STATUS_EXCEPTIONS[sync_status]()
+        raise TERMINAL_STATUS_EXCEPTIONS[sync_status](
+            f"Sync ({sync_metadata.slug!r}, ID {sync_id!r}) "
+            f"was unsuccessful with {sync_status.value!r} status"
+        )
 
 
 @flow
@@ -164,7 +167,7 @@ async def sync_run_wait_for_completion(
             return sync_status, sync_metadata
 
         logger.info(
-            "Waiting on sync id %s with sync status: %s for %s seconds",
+            "Waiting on sync id %s with sync status %s for %s seconds",
             repr(sync_id),
             repr(sync_status.value),
             poll_frequency_seconds,
@@ -174,5 +177,5 @@ async def sync_run_wait_for_completion(
 
     raise HightouchSyncRunTimedOut(
         f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
-        f"for sync ({sync_slug}, ID {sync_id})"
+        f"for sync ({sync_slug!r}, ID {sync_id!r})"
     )
