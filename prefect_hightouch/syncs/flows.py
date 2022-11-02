@@ -136,7 +136,7 @@ async def trigger_sync_run_and_wait_for_completion(
     if sync_status == SyncStatus.SUCCESS:
         return sync_metadata
     else:
-        raise TERMINAL_STATUS_EXCEPTIONS[sync_status]
+        raise TERMINAL_STATUS_EXCEPTIONS[sync_status]()
 
 
 @flow
