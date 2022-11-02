@@ -51,6 +51,7 @@ nav:
     - Home: index.md
     - Syncs: syncs.md
     - Credentials: credentials.md
+    - Exceptions: exceptions.md
     - API Models:
         - CronSchedule: models/cron_schedule.md
         - DbtSchedule: models/dbt_schedule.md

@@ -1,3 +1,7 @@
+"""
+This is a module containing flows used for interacting with syncs.
+"""
+
 import asyncio
 from typing import Tuple
 
@@ -5,53 +9,11 @@ from prefect import flow, get_run_logger
 
 from prefect_hightouch.api_client.models import Sync, SyncStatus, TriggerRunInput
 from prefect_hightouch.credentials.generated import HightouchCredentials
+from prefect_hightouch.exceptions import (
+    TERMINAL_STATUS_EXCEPTIONS,
+    HightouchSyncRunTimedOut,
+)
 from prefect_hightouch.syncs import get_sync, trigger_run
-
-
-class HightouchSyncRunError(RuntimeError):
-    """
-    A generic Hightouch sync exception.
-    """
-
-
-class HightouchSyncRunTimedOut(HightouchSyncRunError):
-    """
-    Raised when Hightouch sync run does not complete in the configured max
-    wait seconds.
-    """
-
-
-class HightouchSyncRunDisabled(HightouchSyncRunError):
-    """
-    Raised when Hightouch sync run is disabled.
-    """
-
-
-class HightouchSyncRunCancelled(HightouchSyncRunError):
-    """
-    Raised when Hightouch sync run is cancelled.
-    """
-
-
-class HightouchSyncRunFailed(HightouchSyncRunError):
-    """
-    Raised when Hightouch sync run is failed.
-    """
-
-
-class HightouchSyncRunInterrupted(HightouchSyncRunError):
-    """
-    Raised when Hightouch sync run is interrupted.
-    """
-
-
-TERMINAL_STATUS_EXCEPTIONS = {
-    SyncStatus.DISABLED: HightouchSyncRunDisabled,
-    SyncStatus.CANCELLED: HightouchSyncRunCancelled,
-    SyncStatus.FAILED: HightouchSyncRunFailed,
-    SyncStatus.INTERRUPTED: HightouchSyncRunInterrupted,
-    SyncStatus.SUCCESS: None,
-}
 
 
 @flow
