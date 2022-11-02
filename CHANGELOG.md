@@ -25,4 +25,5 @@ Released on ????? ?th, 20??.
 
 ### Added
 
-- `list_sync`, `get_sync`, `list_sync_runs`, `trigger_run`, and `trigger_run_custom` task - [#1](https://github.com/PrefectHQ/prefect-hightouch/pull/1)
+- `trigger_sync_run_and_wait_for_completion` and `sync_run_and_wait_for_completion` flows - [#12](https://github.com/PrefectHQ/prefect-hightouch/pull/12)
+- `list_sync`, `get_sync`, `list_sync_runs`, `trigger_run`, and `trigger_run_custom` tasks - [#11](https://github.com/PrefectHQ/prefect-hightouch/pull/11)
