@@ -37,6 +37,23 @@ async def trigger_sync_run_and_wait_for_completion(
         poll_frequency_seconds: Number of seconds to wait in between checks for
             run completion.
 
+    Returns:
+        api_models.sync.Sync:
+        - `id: str`
+        - `slug: str`
+        - `workspace_id: str`
+        - `created_at: str`
+        - `updated_at: str`
+        - `destination_id: str`
+        - `model_id: str`
+        - `configuration: Dict`
+        - `schedule: Dict`
+        - `status: "models.SyncStatus"`
+        - `disabled: bool`
+        - `last_run_at: str`
+        - `referenced_columns: List[str]`
+        - `primary_key: str`
+
     Examples:
         Trigger a Hightouch sync run and wait for completion as a stand alone flow.
         ```python
@@ -123,8 +140,9 @@ async def sync_run_wait_for_completion(
             run completion.
 
     Returns:
-        sync_status: A SyncStatus object.
-        sync_metadata: A Sync object.
+        (sync_status, sync_metadata):
+        - `SyncStatus` object
+        - `Sync` object
 
     Examples:
         Wait for completion as a subflow.
