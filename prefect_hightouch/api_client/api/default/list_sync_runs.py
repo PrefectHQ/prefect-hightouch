@@ -56,7 +56,7 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    kwargs = {
         "method": "get",
         "url": url,
         "headers": headers,
@@ -64,6 +64,10 @@ def _get_kwargs(
         "timeout": client.get_timeout(),
         "params": params,
     }
+
+    if "json" in kwargs:
+        kwargs["json"] = {k: v for k, v in kwargs["json"].items() if v != UNSET}
+    return kwargs
 
 
 def _parse_response(
@@ -90,7 +94,6 @@ def _build_response(
     *, response: httpx.Response
 ) -> Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]:
     response.raise_for_status()
-    print(response.json())
 
     return Response(
         status_code=HTTPStatus(response.status_code),

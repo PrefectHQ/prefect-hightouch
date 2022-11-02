@@ -1,9 +1,21 @@
 import pytest
 from httpx import HTTPStatusError, Response
 
-from prefect_hightouch.api_client.models import ListSyncOrderBy, Sync
-from prefect_hightouch.api_client.models.sync_run import SyncRun
-from prefect_hightouch.syncs.generated import get_sync, list_sync, list_sync_runs
+from prefect_hightouch.api_client.models import (
+    ListSyncOrderBy,
+    Sync,
+    SyncRun,
+    TriggerRunCustomInput,
+    TriggerRunInput,
+    TriggerRunOutput,
+)
+from prefect_hightouch.syncs.generated import (
+    get_sync,
+    list_sync,
+    list_sync_runs,
+    trigger_run,
+    trigger_run_custom,
+)
 
 
 async def test_list_sync(hightouch_credentials, respx_mock):
@@ -166,4 +178,54 @@ async def test_list_sync_runs_error(hightouch_credentials, respx_mock):
             sync_id=123,
             limit=1,
             order_by=ListSyncOrderBy.CREATEDAT,
+        )
+
+
+async def test_trigger_run(hightouch_credentials, respx_mock):
+    respx_mock.post("https://api.hightouch.com/api/v1/syncs/123/trigger").mock(
+        return_value=Response(200, json={"id": "12345678"})
+    )
+    actual = await trigger_run.fn(
+        hightouch_credentials, 123, json_body=TriggerRunInput(full_resync=False)
+    )
+    assert isinstance(actual, TriggerRunOutput)
+    assert actual.id == "12345678"
+
+
+async def test_trigger_run_error(hightouch_credentials, respx_mock):
+    respx_mock.post("https://api.hightouch.com/api/v1/syncs/123/trigger").mock(
+        return_value=Response(401)
+    )
+    with pytest.raises(HTTPStatusError, match="Client error '401 Unauthorized'"):
+        await trigger_run.fn(
+            hightouch_credentials, 123, json_body=TriggerRunInput(full_resync=False)
+        )
+
+
+async def test_trigger_run_custom(hightouch_credentials, respx_mock):
+    respx_mock.post("https://api.hightouch.com/api/v1/syncs/trigger").mock(
+        return_value=Response(200, json={"id": "12345678"})
+    )
+    actual = await trigger_run_custom.fn(
+        hightouch_credentials,
+        json_body=TriggerRunCustomInput(
+            sync_slug="weather-database-to-google-cloud-storage-yhzkq",
+            full_resync=False,
+        ),
+    )
+    assert isinstance(actual, TriggerRunOutput)
+    assert actual.id == "12345678"
+
+
+async def test_trigger_run_custom_error(hightouch_credentials, respx_mock):
+    respx_mock.post("https://api.hightouch.com/api/v1/syncs/trigger").mock(
+        return_value=Response(401)
+    )
+    with pytest.raises(HTTPStatusError, match="Client error '401 Unauthorized'"):
+        await trigger_run_custom.fn(
+            hightouch_credentials,
+            json_body=TriggerRunCustomInput(
+                sync_slug="weather-database-to-google-cloud-storage-yhzkq",
+                full_resync=False,
+            ),
         )

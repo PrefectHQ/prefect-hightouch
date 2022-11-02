@@ -5,7 +5,7 @@ import httpx
 
 from ...client import AuthenticatedClient
 from ...models.destination import Destination
-from ...types import Response
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -19,13 +19,17 @@ def _get_kwargs(
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
-    return {
+    kwargs = {
         "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
     }
+
+    if "json" in kwargs:
+        kwargs["json"] = {k: v for k, v in kwargs["json"].items() if v != UNSET}
+    return kwargs
 
 
 def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Destination]]:

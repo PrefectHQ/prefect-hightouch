@@ -7,7 +7,7 @@ from ...client import AuthenticatedClient
 from ...models.trigger_run_input import TriggerRunInput
 from ...models.trigger_run_output import TriggerRunOutput
 from ...models.validate_error_json import ValidateErrorJSON
-from ...types import Response
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -22,7 +22,7 @@ def _get_kwargs(
 
     json_json_body = json_body.to_dict()
 
-    return {
+    kwargs = {
         "method": "post",
         "url": url,
         "headers": headers,
@@ -30,6 +30,10 @@ def _get_kwargs(
         "timeout": client.get_timeout(),
         "json": json_json_body,
     }
+
+    if "json" in kwargs:
+        kwargs["json"] = {k: v for k, v in kwargs["json"].items() if v != UNSET}
+    return kwargs
 
 
 def _parse_response(
