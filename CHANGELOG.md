@@ -25,4 +25,4 @@ Released on ????? ?th, 20??.
 
 ### Added
 
-- `task_name` task - [#1](https://github.com/PrefectHQ/prefect-hightouch/pull/1)
+- `list_sync`, `get_sync`, `list_sync_runs`, `trigger_run`, and `trigger_run_custom` task - [#1](https://github.com/PrefectHQ/prefect-hightouch/pull/1)
