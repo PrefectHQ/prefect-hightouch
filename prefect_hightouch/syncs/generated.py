@@ -11,7 +11,7 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-02T00:58:41.503123
+# Updated at: 2022-11-02T20:26:08.335638
 
 import typing
 
@@ -73,7 +73,7 @@ async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
     | 401 | Unauthorized. |
     | 422 | Validation Failed. |
     """  # noqa
-    ...
+    ...  # pragma: no cover because only the decorated function gets run
 
 
 @task
@@ -110,7 +110,7 @@ async def trigger_run_custom(
     | 401 | Unauthorized. |
     | 422 | Validation Failed. |
     """  # noqa
-    ...
+    ...  # pragma: no cover because only the decorated function gets run
 
 
 @task
@@ -152,7 +152,7 @@ async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
     | 401 | Unauthorized. |
     | 404 | Not found. |
     """  # noqa
-    ...
+    ...  # pragma: no cover because only the decorated function gets run
 
 
 @task
@@ -196,7 +196,7 @@ async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.Syn
     | 401 | Unauthorized. |
     | 422 | Validation Failed. |
     """  # noqa
-    ...
+    ...  # pragma: no cover because only the decorated function gets run
 
 
 @task
@@ -232,4 +232,4 @@ async def trigger_run(
     | 401 | Unauthorized. |
     | 422 | Validation Failed. |
     """  # noqa
-    ...
+    ...  # pragma: no cover because only the decorated function gets run
