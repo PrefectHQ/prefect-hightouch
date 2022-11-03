@@ -11,7 +11,7 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-02T21:20:12.722156
+# Updated at: 2022-11-03T23:09:32.444743
 
 import typing
 

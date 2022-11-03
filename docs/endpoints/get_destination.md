@@ -1,0 +1,3 @@
+::: prefect_hightouch.api_client.api.default.get_destination
+    options:
+      filters: ["!^__[^__]", "!Response"]

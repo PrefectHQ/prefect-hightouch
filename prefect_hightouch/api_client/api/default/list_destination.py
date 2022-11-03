@@ -1,3 +1,30 @@
+"""
+This is a module containing functions, auto-generated from the 
+REST schema, but note these are **not** Prefect tasks.
+
+Example usage shown below; be sure to replace `endpoint_fn` with the desired endpoint function.
+
+```python
+from prefect_hightouch.credentials import HightouchCredentials
+from prefect_hightouch.api_client.api.default import endpoint_fn
+
+credentials = HightouchCredentials(token="my-service-token")
+client = credentials.get_client()
+result = endpoint_fn.sync(client=client)
+```
+
+The functions are described below:
+
+- `asyncio`: Like sync but async instead of blocking
+
+- `asyncio_detailed`: Like sync_detailed but async instead of blocking
+
+- `sync`: Blocking request that returns parsed data (if successful) or None
+
+- `sync_detailed`: Blocking request that always returns a Request, optionally with parsed set if the request was successful.
+
+"""
+
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
@@ -96,6 +123,7 @@ def sync_detailed(
      List the destinations in the user's workspace
 
     Args:
+        client: An authenticated client.
         name (Union[Unset, None, str]):
         slug (Union[Unset, None, str]):
         limit (Union[Unset, None, float]):
@@ -134,6 +162,7 @@ def sync(
      List the destinations in the user's workspace
 
     Args:
+        client: An authenticated client.
         name (Union[Unset, None, str]):
         slug (Union[Unset, None, str]):
         limit (Union[Unset, None, float]):
@@ -165,6 +194,7 @@ async def asyncio_detailed(
      List the destinations in the user's workspace
 
     Args:
+        client: An authenticated client.
         name (Union[Unset, None, str]):
         slug (Union[Unset, None, str]):
         limit (Union[Unset, None, float]):
@@ -201,6 +231,7 @@ async def asyncio(
      List the destinations in the user's workspace
 
     Args:
+        client: An authenticated client.
         name (Union[Unset, None, str]):
         slug (Union[Unset, None, str]):
         limit (Union[Unset, None, float]):

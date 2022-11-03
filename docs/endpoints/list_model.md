@@ -1,0 +1,3 @@
+::: prefect_hightouch.api_client.api.default.list_model
+    options:
+      filters: ["!^__[^__]", "!Response"]

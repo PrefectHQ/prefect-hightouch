@@ -1,0 +1,4 @@
+::: prefect_hightouch.api_client.models.list_sync_runs_response_200
+    options:
+      show_if_no_docstring: True
+      filters: ["!^__[^__]", "!T"]

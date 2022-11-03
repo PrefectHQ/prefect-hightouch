@@ -119,6 +119,20 @@ def hightouch_sync_flow():
 hightouch_sync_flow()
 ```
 
+### Call API endpoints
+
+If an API endpoint is not exposed as a task, you can call the underlying API endpoint functions, but note, these are **not** Prefect tasks.
+
+```python
+from prefect_hightouch.credentials import HightouchCredentials
+from prefect_hightouch.api_client.api.default import list_destination
+
+credentials = HightouchCredentials.load(token="my-service-token")
+client = credentials.get_client()
+response = list_destination.sync_detailed(client=client)
+data = response.parsed.data
+```
+
 ## Resources
 
 If you encounter any bugs while using `prefect-hightouch`, feel free to open an issue in the [prefect-hightouch](https://github.com/PrefectHQ/prefect-hightouch) repository.

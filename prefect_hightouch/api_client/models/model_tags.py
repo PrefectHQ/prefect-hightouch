@@ -13,7 +13,6 @@ class ModelTags(BaseModel):
     additional_properties: Dict[str, str] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
