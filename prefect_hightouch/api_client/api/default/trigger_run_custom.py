@@ -136,7 +136,7 @@ def sync_detailed(
             sync ID, slug or other filters
 
     Returns:
-        Response[Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -171,7 +171,7 @@ def sync(
             sync ID, slug or other filters
 
     Returns:
-        Response[Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -199,7 +199,7 @@ async def asyncio_detailed(
             sync ID, slug or other filters
 
     Returns:
-        Response[Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -232,7 +232,7 @@ async def asyncio(
             sync ID, slug or other filters
 
     Returns:
-        Response[Union[Any, Union[TriggerRunOutput, ValidateErrorJSON], ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (

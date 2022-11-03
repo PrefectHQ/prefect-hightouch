@@ -130,7 +130,7 @@ def sync_detailed(
         order_by (Union[Unset, None, ListModelOrderBy]):  Default: ListModelOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListModelResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -168,7 +168,7 @@ def sync(
         order_by (Union[Unset, None, ListModelOrderBy]):  Default: ListModelOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListModelResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -199,7 +199,7 @@ async def asyncio_detailed(
         order_by (Union[Unset, None, ListModelOrderBy]):  Default: ListModelOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListModelResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -235,7 +235,7 @@ async def asyncio(
         order_by (Union[Unset, None, ListModelOrderBy]):  Default: ListModelOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListModelResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (

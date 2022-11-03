@@ -95,7 +95,7 @@ def sync_detailed(
         model_id (float):
 
     Returns:
-        Response[Union[Any, Model]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -124,7 +124,7 @@ def sync(
         model_id (float):
 
     Returns:
-        Response[Union[Any, Model]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -146,7 +146,7 @@ async def asyncio_detailed(
         model_id (float):
 
     Returns:
-        Response[Union[Any, Model]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -173,7 +173,7 @@ async def asyncio(
         model_id (float):
 
     Returns:
-        Response[Union[Any, Model]]
+        The parsed response.
     """
 
     return (

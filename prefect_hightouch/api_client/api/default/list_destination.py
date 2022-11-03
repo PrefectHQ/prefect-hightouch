@@ -131,7 +131,7 @@ def sync_detailed(
             ListDestinationOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListDestinationResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -170,7 +170,7 @@ def sync(
             ListDestinationOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListDestinationResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -202,7 +202,7 @@ async def asyncio_detailed(
             ListDestinationOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListDestinationResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -239,7 +239,7 @@ async def asyncio(
             ListDestinationOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListDestinationResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (

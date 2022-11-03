@@ -125,7 +125,7 @@ def sync_detailed(
         order_by (Union[Unset, None, ListSourceOrderBy]):  Default: ListSourceOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSourceResponse200]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -163,7 +163,7 @@ def sync(
         order_by (Union[Unset, None, ListSourceOrderBy]):  Default: ListSourceOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSourceResponse200]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -194,7 +194,7 @@ async def asyncio_detailed(
         order_by (Union[Unset, None, ListSourceOrderBy]):  Default: ListSourceOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSourceResponse200]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -230,7 +230,7 @@ async def asyncio(
         order_by (Union[Unset, None, ListSourceOrderBy]):  Default: ListSourceOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSourceResponse200]]
+        The parsed response.
     """
 
     return (

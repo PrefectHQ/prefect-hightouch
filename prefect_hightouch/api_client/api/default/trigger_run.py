@@ -114,7 +114,7 @@ def sync_detailed(
         json_body (TriggerRunInput): The input of a trigger action to run syncs
 
     Returns:
-        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -149,7 +149,7 @@ def sync(
         json_body (TriggerRunInput): The input of a trigger action to run syncs
 
     Returns:
-        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -177,7 +177,7 @@ async def asyncio_detailed(
         json_body (TriggerRunInput): The input of a trigger action to run syncs
 
     Returns:
-        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -210,7 +210,7 @@ async def asyncio(
         json_body (TriggerRunInput): The input of a trigger action to run syncs
 
     Returns:
-        Response[Union[Any, TriggerRunOutput, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (

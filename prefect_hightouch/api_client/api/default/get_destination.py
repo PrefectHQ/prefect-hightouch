@@ -97,7 +97,7 @@ def sync_detailed(
         destination_id (float):
 
     Returns:
-        Response[Union[Any, Destination]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -126,7 +126,7 @@ def sync(
         destination_id (float):
 
     Returns:
-        Response[Union[Any, Destination]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -148,7 +148,7 @@ async def asyncio_detailed(
         destination_id (float):
 
     Returns:
-        Response[Union[Any, Destination]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -175,7 +175,7 @@ async def asyncio(
         destination_id (float):
 
     Returns:
-        Response[Union[Any, Destination]]
+        The parsed response.
     """
 
     return (

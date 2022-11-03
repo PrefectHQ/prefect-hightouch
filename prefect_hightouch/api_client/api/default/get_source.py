@@ -104,7 +104,7 @@ def sync_detailed(
         source_id (float):
 
     Returns:
-        Response[Union[Any, Source, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -133,7 +133,7 @@ def sync(
         source_id (float):
 
     Returns:
-        Response[Union[Any, Source, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -155,7 +155,7 @@ async def asyncio_detailed(
         source_id (float):
 
     Returns:
-        Response[Union[Any, Source, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -182,7 +182,7 @@ async def asyncio(
         source_id (float):
 
     Returns:
-        Response[Union[Any, Source, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (
