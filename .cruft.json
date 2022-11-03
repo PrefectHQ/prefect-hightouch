@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/PrefectHQ/prefect-collection-template",
+  "commit": "96c492acb3b639176e26eeb03f050851c0641982",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Prefect Technologies, Inc.",
+      "email": "help@prefect.io",
+      "github_organization": "PrefectHQ",
+      "collection_name": "prefect-hightouch",
+      "collection_slug": "prefect_hightouch",
+      "collection_short_description": "Prefect integrations for interacting with Hightouch.",
+      "_copy_without_render": [
+        ".github/workflows/*.yml"
+      ],
+      "_template": "https://github.com/PrefectHQ/prefect-collection-template"
+    }
+  },
+  "directory": null
+}
