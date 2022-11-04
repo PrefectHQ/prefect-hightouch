@@ -12,20 +12,21 @@ Returns:
     A Hightouch REST API Authenticated Client.
 
 Example:
-    Gets a Hightouch REST API Authenticated Client.
+    Gets a Hightouch REST API Authenticated Client and executes the list sync endpoint.
     ```python
     from prefect import flow
     from prefect_hightouch import HightouchCredentials
     from prefect_hightouch.api_client.api.default import list_sync
 
     @flow
-    def example_get_syncs_flow():
+    def example_list_sync_flow():
         token = "consumer_key"
         hightouch_credentials = HightouchCredentials(token=token)
         client = hightouch_credentials.get_client()
-        syncs = list_sync.sync_detailed(client=client)
+        response = list_sync.sync_detailed(client=client)
+        syncs = syncs.parsed.data
         return syncs
 
-    example_get_syncs_flow()
+    example_list_sync_flow()
     ```
 """  # noqa: F405
