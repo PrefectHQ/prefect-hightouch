@@ -11,6 +11,7 @@ from prefect_hightouch.api_client.models import Sync, SyncStatus, TriggerRunInpu
 from prefect_hightouch.credentials.generated import HightouchCredentials
 from prefect_hightouch.exceptions import (
     TERMINAL_STATUS_EXCEPTIONS,
+    HightouchSyncRunError,
     HightouchSyncRunTimedOut,
 )
 from prefect_hightouch.syncs import get_sync, trigger_run
@@ -20,7 +21,7 @@ from prefect_hightouch.syncs import get_sync, trigger_run
 async def trigger_sync_run_and_wait_for_completion(
     hightouch_credentials: HightouchCredentials,
     sync_id: str,
-    full_resync: bool = True,
+    full_resync: bool = False,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
 ) -> Sync:
@@ -97,13 +98,22 @@ async def trigger_sync_run_and_wait_for_completion(
         sync_flow()
         ```
     """
+    logger = get_run_logger()
+
     json_body = TriggerRunInput(full_resync=full_resync)
     sync_run_future = await trigger_run.submit(
         hightouch_credentials=hightouch_credentials,
         sync_id=sync_id,
         json_body=json_body,
     )
-    await sync_run_future.result()
+    sync_run = await sync_run_future.result()
+    logger.info(
+        "Started sync %s run %s; open %s and append %s to view results on webpage.",
+        repr(sync_id),
+        repr(sync_run.id),
+        "https://app.hightouch.com/",
+        f"/sources/{sync_id}/runs/{sync_run.id}",
+    )
 
     sync_status, sync_metadata = await wait_for_sync_run_completion(
         hightouch_credentials=hightouch_credentials,
@@ -115,7 +125,7 @@ async def trigger_sync_run_and_wait_for_completion(
     if sync_status == SyncStatus.SUCCESS:
         return sync_metadata
     else:
-        raise TERMINAL_STATUS_EXCEPTIONS[sync_status](
+        raise TERMINAL_STATUS_EXCEPTIONS.get(sync_status, HightouchSyncRunError)(
             f"Sync ({sync_metadata.slug!r}, ID {sync_id!r}) "
             f"was unsuccessful with {sync_status.value!r} status"
         )
@@ -185,7 +195,8 @@ async def wait_for_sync_run_completion(
             return sync_status, sync_metadata
 
         logger.info(
-            "Waiting on sync id %s with sync status %s for %s seconds",
+            "Waiting on sync (%s, ID %s) with sync status %s for %s seconds",
+            repr(sync_slug),
             repr(sync_id),
             repr(sync_status.value),
             poll_frequency_seconds,

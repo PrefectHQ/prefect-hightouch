@@ -13,7 +13,7 @@ T = ParamSpec("T")  # task function
 R = TypeVar("R")  # The return type of the API function
 
 
-def _execute_endpoint(
+def _update_kwargs_and_execute(
     endpoint_fn: Callable[Concatenate[AuthenticatedClient, C], R]
 ) -> Callable[[Callable[C, R]], Callable[Concatenate[HightouchCredentials, C], R]]:
     """

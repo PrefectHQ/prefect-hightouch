@@ -47,6 +47,7 @@ class HightouchCredentials(Block):
     )
     client_kwargs: Dict[str, Any] = Field(
         default_factory=dict,
+        title="Additional configuration",
         description=(
             "Additional keyword arguments to pass to "
             "`prefect_hightouch.api_client.client.AuthenticatedClient`."
