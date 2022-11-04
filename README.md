@@ -46,6 +46,26 @@ prefect block register -m prefect_hightouch.credentials
 
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
+### Trigger a sync run and wait for completion
+
+```python
+from prefect import flow
+from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.syncs import trigger_sync_run_and_wait_for_completion
+@flow
+def sync_flow():
+    hightouch_credentials = HightouchCredentials.load("hightouch-token")
+    sync_metadata = trigger_sync_run_and_wait_for_completion(
+        hightouch_credentials=hightouch_credentials,
+        sync_id=12345,
+        full_resync=True,
+        max_wait_seconds=1800,
+        poll_frequency_seconds=10,
+    )
+    return sync_metadata
+sync_flow()
+```
+
 ### List, get, and trigger syncs
 
 ```python
