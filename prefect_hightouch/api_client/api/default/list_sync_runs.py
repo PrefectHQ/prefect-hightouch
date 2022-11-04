@@ -1,3 +1,26 @@
+"""
+This is a module containing functions, auto-generated from the 
+REST schema, but note these are **not** Prefect tasks.
+
+Example usage shown below; be sure to replace `endpoint_fn` with the desired endpoint function.
+
+```python
+from prefect_hightouch.credentials import HightouchCredentials
+from prefect_hightouch.api_client.api.default import endpoint_fn
+
+credentials = HightouchCredentials(token="my-service-token")
+client = credentials.get_client()
+result = endpoint_fn.sync(client=client)
+```
+
+The functions are described below:
+
+- `asyncio`: Non-blocking request that returns parsed data (if successful) or None. Any calls must be awaited.
+- `asyncio_detailed`: Non-blocking request that always returns a Request, optionally with parsed set if the request was successful. Any calls must be awaited.
+- `sync`: Blocking request that returns parsed data (if successful) or None.
+- `sync_detailed`: Blocking request that always returns a Request, optionally with parsed set if the request was successful.
+"""
+
 import datetime
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
@@ -119,6 +142,7 @@ def sync_detailed(
      List all sync runs under a sync
 
     Args:
+        client: An authenticated client.
         sync_id (float):
         run_id (Union[Unset, None, float]):
         limit (Union[Unset, None, float]):
@@ -129,7 +153,7 @@ def sync_detailed(
         order_by (Union[Unset, None, ListSyncRunsOrderBy]):  Default: ListSyncRunsOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -168,6 +192,7 @@ def sync(
      List all sync runs under a sync
 
     Args:
+        client: An authenticated client.
         sync_id (float):
         run_id (Union[Unset, None, float]):
         limit (Union[Unset, None, float]):
@@ -178,7 +203,7 @@ def sync(
         order_by (Union[Unset, None, ListSyncRunsOrderBy]):  Default: ListSyncRunsOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return sync_detailed(
@@ -210,6 +235,7 @@ async def asyncio_detailed(
      List all sync runs under a sync
 
     Args:
+        client: An authenticated client.
         sync_id (float):
         run_id (Union[Unset, None, float]):
         limit (Union[Unset, None, float]):
@@ -220,7 +246,7 @@ async def asyncio_detailed(
         order_by (Union[Unset, None, ListSyncRunsOrderBy]):  Default: ListSyncRunsOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]
+        The response.
     """
 
     kwargs = _get_kwargs(
@@ -257,6 +283,7 @@ async def asyncio(
      List all sync runs under a sync
 
     Args:
+        client: An authenticated client.
         sync_id (float):
         run_id (Union[Unset, None, float]):
         limit (Union[Unset, None, float]):
@@ -267,7 +294,7 @@ async def asyncio(
         order_by (Union[Unset, None, ListSyncRunsOrderBy]):  Default: ListSyncRunsOrderBy.ID.
 
     Returns:
-        Response[Union[Any, ListSyncRunsResponse200, ValidateErrorJSON]]
+        The parsed response.
     """
 
     return (

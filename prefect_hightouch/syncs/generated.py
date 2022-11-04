@@ -11,14 +11,14 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-02T21:20:12.722156
+# Updated at: 2022-11-04T17:05:55.015631
 
 import typing
 
 from prefect import task
 
 from prefect_hightouch.api_client import models as api_models
-from prefect_hightouch.api_client.api import _execute_endpoint
+from prefect_hightouch.api_client.api import _update_kwargs_and_execute
 from prefect_hightouch.api_client.api.default.get_sync import (
     asyncio as _get_sync_endpoint,
 )
@@ -37,7 +37,7 @@ from prefect_hightouch.api_client.api.default.trigger_run_custom import (
 
 
 @task
-@_execute_endpoint(_list_sync_endpoint)
+@_update_kwargs_and_execute(_list_sync_endpoint)
 async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
     """
     List all the syncs in the current workspace.
@@ -77,7 +77,7 @@ async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
 
 
 @task
-@_execute_endpoint(_trigger_run_custom_endpoint)
+@_update_kwargs_and_execute(_trigger_run_custom_endpoint)
 async def trigger_run_custom(
     *args, **kwargs
 ) -> api_models.trigger_run_output.TriggerRunOutput:
@@ -114,7 +114,7 @@ async def trigger_run_custom(
 
 
 @task
-@_execute_endpoint(_get_sync_endpoint)
+@_update_kwargs_and_execute(_get_sync_endpoint)
 async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
     """
     Retrieve sync from sync ID.
@@ -156,7 +156,7 @@ async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
 
 
 @task
-@_execute_endpoint(_list_sync_runs_endpoint)
+@_update_kwargs_and_execute(_list_sync_runs_endpoint)
 async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.SyncRun]:
     """
     List all sync runs under a sync.
@@ -200,7 +200,7 @@ async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.Syn
 
 
 @task
-@_execute_endpoint(_trigger_run_endpoint)
+@_update_kwargs_and_execute(_trigger_run_endpoint)
 async def trigger_run(
     *args, **kwargs
 ) -> api_models.trigger_run_output.TriggerRunOutput:
