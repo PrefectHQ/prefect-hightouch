@@ -46,6 +46,26 @@ prefect block register -m prefect_hightouch.credentials
 
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
+### Trigger a sync run and wait for completion
+
+```python
+from prefect import flow
+from prefect_hightouch import HightouchCredentials
+from prefect_hightouch.syncs import trigger_sync_run_and_wait_for_completion
+@flow
+def sync_flow():
+    hightouch_credentials = HightouchCredentials.load("hightouch-token")
+    sync_metadata = trigger_sync_run_and_wait_for_completion(
+        hightouch_credentials=hightouch_credentials,
+        sync_id=12345,
+        full_resync=True,
+        max_wait_seconds=1800,
+        poll_frequency_seconds=10,
+    )
+    return sync_metadata
+sync_flow()
+```
+
 ### List, get, and trigger syncs
 
 ```python
@@ -94,6 +114,20 @@ def hightouch_sync_flow():
     return sync_runs
 
 hightouch_sync_flow()
+```
+
+### Call API endpoints
+
+If an API endpoint is not exposed as a task, you can call the underlying API endpoint functions, but note, these are **not** Prefect tasks.
+
+```python
+from prefect_hightouch.credentials import HightouchCredentials
+from prefect_hightouch.api_client.api.default import list_destination
+
+credentials = HightouchCredentials.load(token="my-service-token")
+client = credentials.get_client()
+response = list_destination.sync_detailed(client=client)
+data = response.parsed.data
 ```
 
 ## Resources

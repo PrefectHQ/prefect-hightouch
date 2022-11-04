@@ -43,6 +43,8 @@ plugins:
             show_bases: True
             show_signature: False
             heading_level: 1
+            filters: ["!^__[^__]", "!T", "!Response"]
+
 watch:
     - prefect_hightouch/
     - README.md
@@ -51,50 +53,65 @@ nav:
     - Home: index.md
     - Syncs: syncs.md
     - Credentials: credentials.md
+    - Exceptions: exceptions.md
+    
     - API Models:
-        - CronSchedule: models/cron_schedule.md
-        - DbtSchedule: models/dbt_schedule.md
-        - DbtScheduleAccount: models/dbt_schedule_account.md
-        - DbtScheduleJob: models/dbt_schedule_job.md
-        - Destination: models/destination.md
-        - DestinationConfiguration: models/destination_configuration.md
-        - Interval: models/interval.md
-        - IntervalSchedule: models/interval_schedule.md
-        - IntervalUnit: models/interval_unit.md
-        - ListDestinationOrderBy: models/list_destination_order_by.md
-        - ListDestinationResponse200: models/list_destination_response_200.md
-        - ListModelOrderBy: models/list_model_order_by.md
-        - ListModelResponse200: models/list_model_response_200.md
-        - ListSourceOrderBy: models/list_source_order_by.md
-        - ListSourceResponse200: models/list_source_response_200.md
-        - ListSyncOrderBy: models/list_sync_order_by.md
-        - ListSyncResponse200: models/list_sync_response_200.md
-        - ListSyncRunsOrderBy: models/list_sync_runs_order_by.md
-        - ListSyncRunsResponse200: models/list_sync_runs_response_200.md
-        - Model: models/model.md
-        - ModelCustom: models/model_custom.md
-        - ModelDbt: models/model_dbt.md
-        - ModelRaw: models/model_raw.md
-        - ModelTable: models/model_table.md
-        - ModelTags: models/model_tags.md
-        - ModelVisual: models/model_visual.md
-        - RecordDayBooleanOrUndefined: models/record_day_boolean_or_undefined.md
-        - Source: models/source.md
-        - SourceConfiguration: models/source_configuration.md
         - Sync: models/sync.md
-        - SyncConfiguration: models/sync_configuration.md
-        - SyncRun: models/sync_run.md
-        - SyncRunFailedRows: models/sync_run_failed_rows.md
-        - SyncRunPlannedRows: models/sync_run_planned_rows.md
-        - SyncRunStatus: models/sync_run_status.md
-        - SyncRunSuccessfulRows: models/sync_run_successful_rows.md
-        - SyncSchedule: models/sync_schedule.md
-        - SyncStatus: models/sync_status.md
-        - TriggerRunCustomInput: models/trigger_run_custom_input.md
-        - TriggerRunInput: models/trigger_run_input.md
-        - TriggerRunOutput: models/trigger_run_output.md
-        - ValidateErrorJson: models/validate_error_json.md
-        - ValidateErrorJsonDetails: models/validate_error_json_details.md
+        - ListSyncResponse200: models/list_sync_response_200.md
+        - CronSchedule: models/cron_schedule.md
         - ValidateErrorJsonMessage: models/validate_error_json_message.md
+        - ListModelResponse200: models/list_model_response_200.md
+        - TriggerRunInput: models/trigger_run_input.md
+        - ModelDbt: models/model_dbt.md
+        - ModelCustom: models/model_custom.md
+        - ModelRaw: models/model_raw.md
+        - RecordDayBooleanOrUndefined: models/record_day_boolean_or_undefined.md
+        - Destination: models/destination.md
+        - SyncRun: models/sync_run.md
+        - IntervalUnit: models/interval_unit.md
+        - Interval: models/interval.md
+        - SyncRunPlannedRows: models/sync_run_planned_rows.md
+        - ListSyncOrderBy: models/list_sync_order_by.md
+        - ListModelOrderBy: models/list_model_order_by.md
+        - ValidateErrorJson: models/validate_error_json.md
+        - ModelTable: models/model_table.md
+        - ListSyncRunsOrderBy: models/list_sync_runs_order_by.md
+        - ModelTags: models/model_tags.md
+        - DbtScheduleJob: models/dbt_schedule_job.md
+        - SyncStatus: models/sync_status.md
+        - DbtSchedule: models/dbt_schedule.md
+        - TriggerRunCustomInput: models/trigger_run_custom_input.md
+        - SyncRunStatus: models/sync_run_status.md
+        - TriggerRunOutput: models/trigger_run_output.md
+        - Model: models/model.md
+        - SyncRunFailedRows: models/sync_run_failed_rows.md
+        - ListDestinationOrderBy: models/list_destination_order_by.md
+        - SyncSchedule: models/sync_schedule.md
+        - ListSyncRunsResponse200: models/list_sync_runs_response_200.md
+        - SyncRunSuccessfulRows: models/sync_run_successful_rows.md
+        - ListSourceResponse200: models/list_source_response_200.md
+        - ModelVisual: models/model_visual.md
         - VisualCronSchedule: models/visual_cron_schedule.md
+        - DestinationConfiguration: models/destination_configuration.md
         - VisualCronScheduleExpressionsItem: models/visual_cron_schedule_expressions_item.md
+        - SyncConfiguration: models/sync_configuration.md
+        - IntervalSchedule: models/interval_schedule.md
+        - ListDestinationResponse200: models/list_destination_response_200.md
+        - ValidateErrorJsonDetails: models/validate_error_json_details.md
+        - Source: models/source.md
+        - DbtScheduleAccount: models/dbt_schedule_account.md
+        - SourceConfiguration: models/source_configuration.md
+        - ListSourceOrderBy: models/list_source_order_by.md
+    
+    - API Endpoints:
+        - get_destination: endpoints/get_destination.md
+        - get_source: endpoints/get_source.md
+        - list_model: endpoints/list_model.md
+        - trigger_run_custom: endpoints/trigger_run_custom.md
+        - list_source: endpoints/list_source.md
+        - trigger_run: endpoints/trigger_run.md
+        - get_sync: endpoints/get_sync.md
+        - get_model: endpoints/get_model.md
+        - list_sync: endpoints/list_sync.md
+        - list_destination: endpoints/list_destination.md
+        - list_sync_runs: endpoints/list_sync_runs.md
