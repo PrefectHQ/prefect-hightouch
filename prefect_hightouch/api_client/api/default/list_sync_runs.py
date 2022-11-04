@@ -15,14 +15,10 @@ result = endpoint_fn.sync(client=client)
 
 The functions are described below:
 
-- `asyncio`: Like sync but async instead of blocking
-
-- `asyncio_detailed`: Like sync_detailed but async instead of blocking
-
-- `sync`: Blocking request that returns parsed data (if successful) or None
-
+- `asyncio`: Non-blocking request that returns parsed data (if successful) or None. Any calls must be awaited.
+- `asyncio_detailed`: Non-blocking request that always returns a Request, optionally with parsed set if the request was successful. Any calls must be awaited.
+- `sync`: Blocking request that returns parsed data (if successful) or None.
 - `sync_detailed`: Blocking request that always returns a Request, optionally with parsed set if the request was successful.
-
 """
 
 import datetime

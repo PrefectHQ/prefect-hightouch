@@ -27,7 +27,7 @@ class HightouchCredentials(Block):
         token: The token to authenticate with Hightouch.
 
         timeout: Number of seconds before the request times out.
-        **client_kwargs: Additional keyword arguments to pass to
+        client_kwargs: Additional keyword arguments to pass to
             `prefect_hightouch.api_client.client.AuthenticatedClient`.
 
     Examples:
@@ -39,7 +39,7 @@ class HightouchCredentials(Block):
     """
 
     _block_type_name = "Hightouch Credentials"
-    # _logo_url = "<LOGO_URL_HERE>"  # noqa
+    # _logo_url = "<UPDATE _logo_url IN __init__.py>"  # noqa
 
     token: SecretStr = Field(default=..., description="Token used for authentication.")
     timeout: float = Field(

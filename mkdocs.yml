@@ -43,6 +43,8 @@ plugins:
             show_bases: True
             show_signature: False
             heading_level: 1
+            filters: ["!^__[^__]", "!T", "!Response"]
+
 watch:
     - prefect_hightouch/
     - README.md
