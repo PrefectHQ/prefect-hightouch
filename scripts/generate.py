@@ -33,7 +33,13 @@ REPO_DIRECTORY = THIS_DIRECTORY.parent
 # UPDATE THESE AS DESIRED
 service_name = "Hightouch"
 urls = ["https://api.hightouch.io/api/swagger.json"]
-routes = None
+routes = [
+    "/syncs/trigger",
+    "/syncs/{syncId}/trigger",
+    "/syncs/{syncId}/runs",
+    "/syncs",
+    "/syncs/{syncId}",
+]
 overwrite = True
 
 

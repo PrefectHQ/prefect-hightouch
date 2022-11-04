@@ -46,22 +46,54 @@ prefect block register -m prefect_hightouch.credentials
 
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
-### Write and run a flow
+### List, get, and trigger syncs
 
 ```python
 from prefect import flow
-from prefect_hightouch.tasks import (
-    goodbye_prefect_hightouch,
-    hello_prefect_hightouch,
+from prefect_hightouch import HightouchCredentials, api_models
+from prefect_hightouch.syncs import (
+    list_sync,
+    get_sync,
+    list_sync_runs,
+    trigger_run,
+    trigger_run_custom,
 )
 
-
 @flow
-def example_flow():
-    hello_prefect_hightouch
-    goodbye_prefect_hightouch
+def hightouch_sync_flow():
+    hightouch_credentials = HightouchCredentials.load("hightouch-token")
 
-example_flow()
+    # list all syncs
+    syncs = list_sync(
+        hightouch_credentials, order_by=api_models.ListSyncOrderBy.CREATEDAT
+    )
+
+    # get first sync
+    sync_id = syncs[0].id
+    sync = get_sync(hightouch_credentials, sync_id)
+
+    # list previous runs
+    sync_runs = list_sync_runs(hightouch_credentials, sync_id)
+
+    # trigger by id
+    sync_run = trigger_run(
+        hightouch_credentials,
+        sync_id,
+        json_body=api_models.TriggerRunInput(full_resync=False),
+    )
+
+    # trigger by slug
+    sync_slug = syncs[0].slug
+    sync_run_2 = trigger_run_custom(
+        hightouch_credentials,
+        json_body=api_models.TriggerRunCustomInput(
+            sync_slug=sync_slug,
+            full_resync=False,
+        ),
+    )
+    return sync_runs
+
+hightouch_sync_flow()
 ```
 
 ## Resources

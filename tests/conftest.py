@@ -1,6 +1,8 @@
 import pytest
 from prefect.testing.utilities import prefect_test_harness
 
+from prefect_hightouch import HightouchCredentials
+
 
 @pytest.fixture(scope="session", autouse=True)
 def prefect_db():
@@ -20,3 +22,8 @@ def reset_object_registry():
 
     with PrefectObjectRegistry():
         yield
+
+
+@pytest.fixture
+def hightouch_credentials() -> HightouchCredentials:
+    return HightouchCredentials(token="token")
