@@ -54,14 +54,14 @@ def _get_kwargs(
 
 
 def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Model]]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = Model.from_dict(response.json())
 
         return response_200
-    if response.status_code == HTTPStatus.UNAUTHORIZED:
+    if response.status_code == 401:
         response_401 = cast(Any, None)
         return response_401
-    if response.status_code == HTTPStatus.NOT_FOUND:
+    if response.status_code == 404:
         response_404 = cast(Any, None)
         return response_404
     return None
