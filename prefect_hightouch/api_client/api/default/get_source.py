@@ -57,17 +57,17 @@ def _get_kwargs(
 def _parse_response(
     *, response: httpx.Response
 ) -> Optional[Union[Any, Source, ValidateErrorJSON]]:
-    if response.status_code == 200:
+    if response.status_code == HTTPStatus.OK:
         response_200 = Source.from_dict(response.json())
 
         return response_200
-    if response.status_code == 401:
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = cast(Any, None)
         return response_401
-    if response.status_code == 404:
+    if response.status_code == HTTPStatus.NOT_FOUND:
         response_404 = cast(Any, None)
         return response_404
-    if response.status_code == 422:
+    if response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
         response_422 = ValidateErrorJSON.from_dict(response.json())
 
         return response_422
