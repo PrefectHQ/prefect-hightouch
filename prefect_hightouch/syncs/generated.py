@@ -11,7 +11,7 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-04T18:46:27.586065
+# Updated at: 2022-11-05T17:38:31.526172
 
 import typing
 
@@ -59,8 +59,7 @@ async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
             Specify the order.
 
     Returns:
-        typing.List[api_models.sync.Sync]:
-        - `data: List`
+        - `data`: `List`<br>
 
     <h4>API Endpoint:</h4>
     `/syncs`
@@ -94,10 +93,9 @@ async def trigger_run_custom(
             other filters.
 
     Returns:
-        api_models.trigger_run_output.TriggerRunOutput:
-        - `id: str`
-        - `message: str`
-        - `details: Dict`
+        - `id`: `str`<br>
+            - `message`: `str`<br>
+            - `details`: `Dict`<br>
 
     <h4>API Endpoint:</h4>
     `/syncs/trigger`
@@ -126,21 +124,20 @@ async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
             Sync ID used in formatting the endpoint URL.
 
     Returns:
-        api_models.sync.Sync:
-        - `id: str`
-        - `slug: str`
-        - `workspace_id: str`
-        - `created_at: str`
-        - `updated_at: str`
-        - `destination_id: str`
-        - `model_id: str`
-        - `configuration: Dict`
-        - `schedule: Dict`
-        - `status: "models.SyncStatus"`
-        - `disabled: bool`
-        - `last_run_at: str`
-        - `referenced_columns: List[str]`
-        - `primary_key: str`
+        - `id`: `str`<br>
+            - `slug`: `str`<br>
+            - `workspace_id`: `str`<br>
+            - `created_at`: `str`<br>
+            - `updated_at`: `str`<br>
+            - `destination_id`: `str`<br>
+            - `model_id`: `str`<br>
+            - `configuration`: `Dict`<br>
+            - `schedule`: `Dict`<br>
+            - `status`: `"models.SyncStatus"`<br>
+            - `disabled`: `bool`<br>
+            - `last_run_at`: `str`<br>
+            - `referenced_columns`: `List[str]`<br>
+            - `primary_key`: `str`<br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}`
@@ -182,8 +179,7 @@ async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.Syn
             Specify the order.
 
     Returns:
-        typing.List[api_models.sync_run.SyncRun]:
-        - `data: List`
+        - `data`: `List`<br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/runs`
@@ -218,8 +214,7 @@ async def trigger_run(
             The input of a trigger action to run syncs.
 
     Returns:
-        api_models.trigger_run_output.TriggerRunOutput:
-        - `id: str`
+        - `id`: `str`<br>
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/trigger`

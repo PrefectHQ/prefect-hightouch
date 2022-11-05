@@ -7,7 +7,7 @@ from typing import Tuple
 
 from prefect import flow, get_run_logger
 
-from prefect_hightouch.api_client.models import Sync, SyncStatus, TriggerRunInput
+from prefect_hightouch import api_models
 from prefect_hightouch.credentials.generated import HightouchCredentials
 from prefect_hightouch.exceptions import (
     TERMINAL_STATUS_EXCEPTIONS,
@@ -24,7 +24,7 @@ async def trigger_sync_run_and_wait_for_completion(
     full_resync: bool = False,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
-) -> Sync:
+) -> api_models.sync.Sync:
     """
     Flow that triggers a sync run and waits for the triggered run to complete.
 
@@ -39,21 +39,20 @@ async def trigger_sync_run_and_wait_for_completion(
             run completion.
 
     Returns:
-        api_models.sync.Sync:
-        - `id: str`
-        - `slug: str`
-        - `workspace_id: str`
-        - `created_at: str`
-        - `updated_at: str`
-        - `destination_id: str`
-        - `model_id: str`
-        - `configuration: Dict`
-        - `schedule: Dict`
-        - `status: "models.SyncStatus"`
-        - `disabled: bool`
-        - `last_run_at: str`
-        - `referenced_columns: List[str]`
-        - `primary_key: str`
+        - `id`: `str`<br>
+            - `slug`: `str`<br>
+            - `workspace_id`: `str`<br>
+            - `created_at`: `str`<br>
+            - `updated_at`: `str`<br>
+            - `destination_id`: `str`<br>
+            - `model_id`: `str`<br>
+            - `configuration`: `Dict`<br>
+            - `schedule`: `Dict`<br>
+            - `status`: `"models.SyncStatus"`<br>
+            - `disabled`: `bool`<br>
+            - `last_run_at`: `str`<br>
+            - `referenced_columns`: `List[str]`<br>
+            - `primary_key`: `str`<br>
 
     Examples:
         Trigger a Hightouch sync run and wait for completion as a stand alone flow.
@@ -100,7 +99,7 @@ async def trigger_sync_run_and_wait_for_completion(
     """
     logger = get_run_logger()
 
-    json_body = TriggerRunInput(full_resync=full_resync)
+    json_body = api_models.trigger_run_input.TriggerRunInput(full_resync=full_resync)
     sync_run_future = await trigger_run.submit(
         hightouch_credentials=hightouch_credentials,
         sync_id=sync_id,
@@ -122,7 +121,7 @@ async def trigger_sync_run_and_wait_for_completion(
         poll_frequency_seconds=poll_frequency_seconds,
     )
 
-    if sync_status == SyncStatus.SUCCESS:
+    if sync_status == api_models.sync.SyncStatus.SUCCESS:
         return sync_metadata
     else:
         raise TERMINAL_STATUS_EXCEPTIONS.get(sync_status, HightouchSyncRunError)(
@@ -137,7 +136,7 @@ async def wait_for_sync_run_completion(
     sync_id: str,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
-) -> Tuple[SyncStatus, Sync]:
+) -> Tuple[api_models.sync.SyncStatus, api_models.sync.Sync]:
     """
     Flow that waits for the triggered sync run to complete.
 
@@ -150,9 +149,21 @@ async def wait_for_sync_run_completion(
             run completion.
 
     Returns:
-        (sync_status, sync_metadata):
-        - `SyncStatus` object
-        - `Sync` object
+        - `value`
+        - `id`: `str`<br>
+            - `slug`: `str`<br>
+            - `workspace_id`: `str`<br>
+            - `created_at`: `str`<br>
+            - `updated_at`: `str`<br>
+            - `destination_id`: `str`<br>
+            - `model_id`: `str`<br>
+            - `configuration`: `Dict`<br>
+            - `schedule`: `Dict`<br>
+            - `status`: `"api_models.SyncStatus"`<br>
+            - `disabled`: `bool`<br>
+            - `last_run_at`: `str`<br>
+            - `referenced_columns`: `List[str]`<br>
+            - `primary_key`: `str`<br>
 
     Examples:
         Wait for completion as a subflow.
