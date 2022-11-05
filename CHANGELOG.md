@@ -17,8 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `Returns` docstrings for `griffe` to accurately parse - [#17](https://github.com/PrefectHQ/prefect-hightouch/pull/17)
-
 ### Security
 
 ## 0.1.0
