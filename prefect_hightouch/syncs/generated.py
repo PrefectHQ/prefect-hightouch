@@ -11,7 +11,7 @@ REST schema, used for interacting with syncs.
 # 3. hide the generated function in `docs/syncs.md` under `options`
 
 # OpenAPI spec: swagger.yaml
-# Updated at: 2022-11-05T17:30:26.638468
+# Updated at: 2022-11-05T17:33:39.765063
 
 import typing
 
@@ -61,7 +61,6 @@ async def list_sync(*args, **kwargs) -> typing.List[api_models.sync.Sync]:
     Returns:
         - `data`: `List`<br>
 
-
     <h4>API Endpoint:</h4>
     `/syncs`
 
@@ -95,7 +94,6 @@ async def trigger_run_custom(
 
     Returns:
         - `id`: `str`<br>
-
             - `message`: `str`<br>
             - `details`: `Dict`<br>
 
@@ -127,7 +125,6 @@ async def get_sync(*args, **kwargs) -> api_models.sync.Sync:
 
     Returns:
         - `id`: `str`<br>
-
             - `slug`: `str`<br>
             - `workspace_id`: `str`<br>
             - `created_at`: `str`<br>
@@ -184,7 +181,6 @@ async def list_sync_runs(*args, **kwargs) -> typing.List[api_models.sync_run.Syn
     Returns:
         - `data`: `List`<br>
 
-
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/runs`
 
@@ -219,7 +215,6 @@ async def trigger_run(
 
     Returns:
         - `id`: `str`<br>
-
 
     <h4>API Endpoint:</h4>
     `/syncs/{sync_id}/trigger`

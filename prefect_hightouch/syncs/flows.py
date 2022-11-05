@@ -39,20 +39,20 @@ async def trigger_sync_run_and_wait_for_completion(
             run completion.
 
     Returns:
-        - `id: str`<br>
-            - `slug: str`<br>
-            - `workspace_id: str`<br>
-            - `created_at: str`<br>
-            - `updated_at: str`<br>
-            - `destination_id: str`<br>
-            - `model_id: str`<br>
-            - `configuration: Dict`<br>
-            - `schedule: Dict`<br>
-            - `status: "models.api_models.sync.SyncStatus"`<br>
-            - `disabled: bool`<br>
-            - `last_run_at: str`<br>
-            - `referenced_columns: List[str]`<br>
-            - `primary_key: str`<br>
+        - `id`: `str`<br>
+            - `slug`: `str`<br>
+            - `workspace_id`: `str`<br>
+            - `created_at`: `str`<br>
+            - `updated_at`: `str`<br>
+            - `destination_id`: `str`<br>
+            - `model_id`: `str`<br>
+            - `configuration`: `Dict`<br>
+            - `schedule`: `Dict`<br>
+            - `status`: `"models.SyncStatus"`<br>
+            - `disabled`: `bool`<br>
+            - `last_run_at`: `str`<br>
+            - `referenced_columns`: `List[str]`<br>
+            - `primary_key`: `str`<br>
 
     Examples:
         Trigger a Hightouch sync run and wait for completion as a stand alone flow.
@@ -150,20 +150,20 @@ async def wait_for_sync_run_completion(
 
     Returns:
         - `value`
-        - `id: str`<br>
-            - `slug: str`<br>
-            - `workspace_id: str`<br>
-            - `created_at: str`<br>
-            - `updated_at: str`<br>
-            - `destination_id: str`<br>
-            - `model_id: str`<br>
-            - `configuration: Dict`<br>
-            - `schedule: Dict`<br>
-            - `status: "models.api_models.sync.SyncStatus"`<br>
-            - `disabled: bool`<br>
-            - `last_run_at: str`<br>
-            - `referenced_columns: List[str]`<br>
-            - `primary_key: str`<br>
+        - `id`: `str`<br>
+            - `slug`: `str`<br>
+            - `workspace_id`: `str`<br>
+            - `created_at`: `str`<br>
+            - `updated_at`: `str`<br>
+            - `destination_id`: `str`<br>
+            - `model_id`: `str`<br>
+            - `configuration`: `Dict`<br>
+            - `schedule`: `Dict`<br>
+            - `status`: `"api_models.SyncStatus"`<br>
+            - `disabled`: `bool`<br>
+            - `last_run_at`: `str`<br>
+            - `referenced_columns`: `List[str]`<br>
+            - `primary_key`: `str`<br>
 
     Examples:
         Wait for completion as a subflow.
