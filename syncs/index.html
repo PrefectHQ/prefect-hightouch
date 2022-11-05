@@ -1,0 +1,3306 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://PrefectHQ.github.io/prefect-hightouch/syncs/">
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
+    
+    
+      
+        <title>Syncs - prefect-hightouch</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.815d1a91.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CSource+Code+Pro:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Source Code Pro"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prefect_hightouch.syncs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="prefect-hightouch" class="md-header__button md-logo" aria-label="prefect-hightouch" data-md-component="logo">
+      
+  <img src="../img/prefect-logo-mark-solid-white-500.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            prefect-hightouch
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Syncs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/PrefectHQ/prefect-hightouch" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="prefect-hightouch" class="md-nav__button md-logo" aria-label="prefect-hightouch" data-md-component="logo">
+      
+  <img src="../img/prefect-logo-mark-solid-white-500.png" alt="logo">
+
+    </a>
+    prefect-hightouch
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/PrefectHQ/prefect-hightouch" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Syncs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Syncs
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows" class="md-nav__link">
+    flows
+  </a>
+  
+    <nav class="md-nav" aria-label="flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows.trigger_sync_run_and_wait_for_completion" class="md-nav__link">
+    trigger_sync_run_and_wait_for_completion()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows.wait_for_sync_run_completion" class="md-nav__link">
+    wait_for_sync_run_completion()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated" class="md-nav__link">
+    generated
+  </a>
+  
+    <nav class="md-nav" aria-label="generated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.get_sync" class="md-nav__link">
+    get_sync()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.list_sync" class="md-nav__link">
+    list_sync()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.list_sync_runs" class="md-nav__link">
+    list_sync_runs()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.trigger_run" class="md-nav__link">
+    trigger_run()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.trigger_run_custom" class="md-nav__link">
+    trigger_run_custom()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        Credentials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          API Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Models" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync/" class="md-nav__link">
+        Sync
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_sync_response_200/" class="md-nav__link">
+        ListSyncResponse200
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/cron_schedule/" class="md-nav__link">
+        CronSchedule
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/validate_error_json_message/" class="md-nav__link">
+        ValidateErrorJsonMessage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_model_response_200/" class="md-nav__link">
+        ListModelResponse200
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/trigger_run_input/" class="md-nav__link">
+        TriggerRunInput
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_dbt/" class="md-nav__link">
+        ModelDbt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_custom/" class="md-nav__link">
+        ModelCustom
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_raw/" class="md-nav__link">
+        ModelRaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/record_day_boolean_or_undefined/" class="md-nav__link">
+        RecordDayBooleanOrUndefined
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/destination/" class="md-nav__link">
+        Destination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_run/" class="md-nav__link">
+        SyncRun
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/interval_unit/" class="md-nav__link">
+        IntervalUnit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/interval/" class="md-nav__link">
+        Interval
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_run_planned_rows/" class="md-nav__link">
+        SyncRunPlannedRows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_sync_order_by/" class="md-nav__link">
+        ListSyncOrderBy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_model_order_by/" class="md-nav__link">
+        ListModelOrderBy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/validate_error_json/" class="md-nav__link">
+        ValidateErrorJson
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_table/" class="md-nav__link">
+        ModelTable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_sync_runs_order_by/" class="md-nav__link">
+        ListSyncRunsOrderBy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_tags/" class="md-nav__link">
+        ModelTags
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/dbt_schedule_job/" class="md-nav__link">
+        DbtScheduleJob
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_status/" class="md-nav__link">
+        SyncStatus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/dbt_schedule/" class="md-nav__link">
+        DbtSchedule
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/trigger_run_custom_input/" class="md-nav__link">
+        TriggerRunCustomInput
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_run_status/" class="md-nav__link">
+        SyncRunStatus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/trigger_run_output/" class="md-nav__link">
+        TriggerRunOutput
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_run_failed_rows/" class="md-nav__link">
+        SyncRunFailedRows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_destination_order_by/" class="md-nav__link">
+        ListDestinationOrderBy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_schedule/" class="md-nav__link">
+        SyncSchedule
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_sync_runs_response_200/" class="md-nav__link">
+        ListSyncRunsResponse200
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_run_successful_rows/" class="md-nav__link">
+        SyncRunSuccessfulRows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_source_response_200/" class="md-nav__link">
+        ListSourceResponse200
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/model_visual/" class="md-nav__link">
+        ModelVisual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/visual_cron_schedule/" class="md-nav__link">
+        VisualCronSchedule
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/destination_configuration/" class="md-nav__link">
+        DestinationConfiguration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/visual_cron_schedule_expressions_item/" class="md-nav__link">
+        VisualCronScheduleExpressionsItem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/sync_configuration/" class="md-nav__link">
+        SyncConfiguration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/interval_schedule/" class="md-nav__link">
+        IntervalSchedule
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_destination_response_200/" class="md-nav__link">
+        ListDestinationResponse200
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/validate_error_json_details/" class="md-nav__link">
+        ValidateErrorJsonDetails
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/source/" class="md-nav__link">
+        Source
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/dbt_schedule_account/" class="md-nav__link">
+        DbtScheduleAccount
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/source_configuration/" class="md-nav__link">
+        SourceConfiguration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/list_source_order_by/" class="md-nav__link">
+        ListSourceOrderBy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          API Endpoints
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Endpoints" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          API Endpoints
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/get_destination/" class="md-nav__link">
+        get_destination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/get_source/" class="md-nav__link">
+        get_source
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/list_model/" class="md-nav__link">
+        list_model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/trigger_run_custom/" class="md-nav__link">
+        trigger_run_custom
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/list_source/" class="md-nav__link">
+        list_source
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/trigger_run/" class="md-nav__link">
+        trigger_run
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/get_sync/" class="md-nav__link">
+        get_sync
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/get_model/" class="md-nav__link">
+        get_model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/list_sync/" class="md-nav__link">
+        list_sync
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/list_destination/" class="md-nav__link">
+        list_destination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/list_sync_runs/" class="md-nav__link">
+        list_sync_runs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows" class="md-nav__link">
+    flows
+  </a>
+  
+    <nav class="md-nav" aria-label="flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows.trigger_sync_run_and_wait_for_completion" class="md-nav__link">
+    trigger_sync_run_and_wait_for_completion()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.flows.wait_for_sync_run_completion" class="md-nav__link">
+    wait_for_sync_run_completion()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated" class="md-nav__link">
+    generated
+  </a>
+  
+    <nav class="md-nav" aria-label="generated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.get_sync" class="md-nav__link">
+    get_sync()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.list_sync" class="md-nav__link">
+    list_sync()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.list_sync_runs" class="md-nav__link">
+    list_sync_runs()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.trigger_run" class="md-nav__link">
+    trigger_run()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_hightouch.syncs.generated.trigger_run_custom" class="md-nav__link">
+    trigger_run_custom()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/PrefectHQ/prefect-hightouch/edit/main/docs/syncs.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h1 id="prefect_hightouch.syncs" class="doc doc-heading">
+          <code>prefect_hightouch.syncs</code>
+
+
+</h1>
+
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_hightouch.syncs.flows" class="doc doc-heading">
+          <code>flows</code>
+
+
+</h2>
+
+  <div class="doc doc-contents ">
+  
+      <p>This is a module containing flows used for interacting with syncs.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.flows.trigger_sync_run_and_wait_for_completion" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">trigger_sync_run_and_wait_for_completion</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Flow that triggers a sync run and waits for the triggered run to complete.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.generated.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sync_id</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Sync ID used in formatting the endpoint URL.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>full_resync</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to resync all the rows in the query
+(i.e. ignoring previously synced rows).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_wait_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Maximum number of seconds to wait for the entire
+flow to complete.</p></td>
+          <td>
+                <code>900</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>poll_frequency_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Number of seconds to wait in between checks for
+run completion.</p></td>
+          <td>
+                <code>10</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_models.sync" href="../models/sync/#prefect_hightouch.api_client.models.sync">sync</a>.<span title="api_models.sync.Sync">Sync</span></code>
+          </td>
+          <td><ul>
+<li><code>id</code>: <code>str</code><br></li>
+<li><code>slug</code>: <code>str</code><br></li>
+<li><code>workspace_id</code>: <code>str</code><br></li>
+<li><code>created_at</code>: <code>str</code><br></li>
+<li><code>updated_at</code>: <code>str</code><br></li>
+<li><code>destination_id</code>: <code>str</code><br></li>
+<li><code>model_id</code>: <code>str</code><br></li>
+<li><code>configuration</code>: <code>Dict</code><br></li>
+<li><code>schedule</code>: <code>Dict</code><br></li>
+<li><code>status</code>: <code>"models.SyncStatus"</code><br></li>
+<li><code>disabled</code>: <code>bool</code><br></li>
+<li><code>last_run_at</code>: <code>str</code><br></li>
+<li><code>referenced_columns</code>: <code>List[str]</code><br></li>
+<li><code>primary_key</code>: <code>str</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Trigger a Hightouch sync run and wait for completion as a stand alone flow.
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">prefect_hightouch</span> <span class="kn">import</span> <span class="n">HightouchCredentials</span>
+<span class="kn">from</span> <span class="nn">prefect_hightouch.syncs</span> <span class="kn">import</span> <span class="n">trigger_sync_run_and_wait_for_completion</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">trigger_sync_run_and_wait_for_completion</span><span class="p">(</span>
+        <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">HightouchCredentials</span><span class="p">(</span>
+            <span class="n">token</span><span class="o">=</span><span class="s2">&quot;1abc0d23-1234-1a2b-abc3-12ab456c7d8e&quot;</span>
+        <span class="p">),</span>
+        <span class="n">sync_id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+        <span class="n">full_resync</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">max_wait_seconds</span><span class="o">=</span><span class="mi">1800</span><span class="p">,</span>
+        <span class="n">poll_frequency_seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p>Trigger a Hightouch sync run and wait for completion as a subflow.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
+
+<span class="kn">from</span> <span class="nn">prefect_hightouch</span> <span class="kn">import</span> <span class="n">HightouchCredentials</span>
+<span class="kn">from</span> <span class="nn">prefect_hightouch.syncs</span> <span class="kn">import</span> <span class="n">trigger_sync_run_and_wait_for_completion</span>
+
+<span class="nd">@flow</span>
+<span class="k">def</span> <span class="nf">sync_flow</span><span class="p">():</span>
+    <span class="n">hightouch_credentials</span> <span class="o">=</span> <span class="n">HightouchCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;hightouch-token&quot;</span><span class="p">)</span>
+    <span class="n">sync_metadata</span> <span class="o">=</span> <span class="n">trigger_sync_run_and_wait_for_completion</span><span class="p">(</span>
+        <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">hightouch_credentials</span><span class="p">,</span>
+        <span class="n">sync_id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+        <span class="n">full_resync</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">max_wait_seconds</span><span class="o">=</span><span class="mi">1800</span><span class="p">,</span>
+        <span class="n">poll_frequency_seconds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">sync_metadata</span>
+
+<span class="n">sync_flow</span><span class="p">()</span>
+</code></pre></div></p>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/flows.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">trigger_sync_run_and_wait_for_completion</span><span class="p">(</span>
+    <span class="n">hightouch_credentials</span><span class="p">:</span> <span class="n">HightouchCredentials</span><span class="p">,</span>
+    <span class="n">sync_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">full_resync</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_wait_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="n">poll_frequency_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">Sync</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flow that triggers a sync run and waits for the triggered run to complete.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials: Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        sync_id: Sync ID used in formatting the endpoint URL.</span>
+<span class="sd">        full_resync: Whether to resync all the rows in the query</span>
+<span class="sd">            (i.e. ignoring previously synced rows).</span>
+<span class="sd">        max_wait_seconds: Maximum number of seconds to wait for the entire</span>
+<span class="sd">            flow to complete.</span>
+<span class="sd">        poll_frequency_seconds: Number of seconds to wait in between checks for</span>
+<span class="sd">            run completion.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `slug`: `str`&lt;br&gt;</span>
+<span class="sd">            - `workspace_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `created_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `updated_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `destination_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `model_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `configuration`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `schedule`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `status`: `&quot;models.SyncStatus&quot;`&lt;br&gt;</span>
+<span class="sd">            - `disabled`: `bool`&lt;br&gt;</span>
+<span class="sd">            - `last_run_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `referenced_columns`: `List[str]`&lt;br&gt;</span>
+<span class="sd">            - `primary_key`: `str`&lt;br&gt;</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Trigger a Hightouch sync run and wait for completion as a stand alone flow.</span>
+<span class="sd">        ```python</span>
+<span class="sd">        import asyncio</span>
+
+<span class="sd">        from prefect_hightouch import HightouchCredentials</span>
+<span class="sd">        from prefect_hightouch.syncs import trigger_sync_run_and_wait_for_completion</span>
+
+<span class="sd">        asyncio.run(</span>
+<span class="sd">            trigger_sync_run_and_wait_for_completion(</span>
+<span class="sd">                hightouch_credentials=HightouchCredentials(</span>
+<span class="sd">                    token=&quot;1abc0d23-1234-1a2b-abc3-12ab456c7d8e&quot;</span>
+<span class="sd">                ),</span>
+<span class="sd">                sync_id=12345,</span>
+<span class="sd">                full_resync=True,</span>
+<span class="sd">                max_wait_seconds=1800,</span>
+<span class="sd">                poll_frequency_seconds=5,</span>
+<span class="sd">            )</span>
+<span class="sd">        )</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        Trigger a Hightouch sync run and wait for completion as a subflow.</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from prefect import flow</span>
+
+<span class="sd">        from prefect_hightouch import HightouchCredentials</span>
+<span class="sd">        from prefect_hightouch.syncs import trigger_sync_run_and_wait_for_completion</span>
+
+<span class="sd">        @flow</span>
+<span class="sd">        def sync_flow():</span>
+<span class="sd">            hightouch_credentials = HightouchCredentials.load(&quot;hightouch-token&quot;)</span>
+<span class="sd">            sync_metadata = trigger_sync_run_and_wait_for_completion(</span>
+<span class="sd">                hightouch_credentials=hightouch_credentials,</span>
+<span class="sd">                sync_id=12345,</span>
+<span class="sd">                full_resync=True,</span>
+<span class="sd">                max_wait_seconds=1800,</span>
+<span class="sd">                poll_frequency_seconds=10,</span>
+<span class="sd">            )</span>
+<span class="sd">            return sync_metadata</span>
+
+<span class="sd">        sync_flow()</span>
+<span class="sd">        ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_run_logger</span><span class="p">()</span>
+
+    <span class="n">json_body</span> <span class="o">=</span> <span class="n">api_models</span><span class="o">.</span><span class="n">trigger_run_input</span><span class="o">.</span><span class="n">TriggerRunInput</span><span class="p">(</span><span class="n">full_resync</span><span class="o">=</span><span class="n">full_resync</span><span class="p">)</span>
+    <span class="n">sync_run_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">trigger_run</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">hightouch_credentials</span><span class="p">,</span>
+        <span class="n">sync_id</span><span class="o">=</span><span class="n">sync_id</span><span class="p">,</span>
+        <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">sync_run</span> <span class="o">=</span> <span class="k">await</span> <span class="n">sync_run_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Started sync </span><span class="si">%s</span><span class="s2"> run </span><span class="si">%s</span><span class="s2">; open </span><span class="si">%s</span><span class="s2"> and append </span><span class="si">%s</span><span class="s2"> to view results on webpage.&quot;</span><span class="p">,</span>
+        <span class="nb">repr</span><span class="p">(</span><span class="n">sync_id</span><span class="p">),</span>
+        <span class="nb">repr</span><span class="p">(</span><span class="n">sync_run</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+        <span class="s2">&quot;https://app.hightouch.com/&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;/sources/</span><span class="si">{</span><span class="n">sync_id</span><span class="si">}</span><span class="s2">/runs/</span><span class="si">{</span><span class="n">sync_run</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">sync_status</span><span class="p">,</span> <span class="n">sync_metadata</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wait_for_sync_run_completion</span><span class="p">(</span>
+        <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">hightouch_credentials</span><span class="p">,</span>
+        <span class="n">sync_id</span><span class="o">=</span><span class="n">sync_id</span><span class="p">,</span>
+        <span class="n">max_wait_seconds</span><span class="o">=</span><span class="n">max_wait_seconds</span><span class="p">,</span>
+        <span class="n">poll_frequency_seconds</span><span class="o">=</span><span class="n">poll_frequency_seconds</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sync_status</span> <span class="o">==</span> <span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">SyncStatus</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sync_metadata</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TERMINAL_STATUS_EXCEPTIONS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sync_status</span><span class="p">,</span> <span class="n">HightouchSyncRunError</span><span class="p">)(</span>
+            <span class="sa">f</span><span class="s2">&quot;Sync (</span><span class="si">{</span><span class="n">sync_metadata</span><span class="o">.</span><span class="n">slug</span><span class="si">!r}</span><span class="s2">, ID </span><span class="si">{</span><span class="n">sync_id</span><span class="si">!r}</span><span class="s2">) &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;was unsuccessful with </span><span class="si">{</span><span class="n">sync_status</span><span class="o">.</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> status&quot;</span>
+        <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.flows.wait_for_sync_run_completion" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">wait_for_sync_run_completion</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Flow that waits for the triggered sync run to complete.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.generated.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sync_id</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Sync ID used in formatting the endpoint URL.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_wait_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Maximum number of seconds to wait for the
+entire flow to complete.</p></td>
+          <td>
+                <code>900</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>poll_frequency_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Number of seconds to wait in between checks for
+run completion.</p></td>
+          <td>
+                <code>10</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_models.sync" href="../models/sync/#prefect_hightouch.api_client.models.sync">sync</a>.<span title="api_models.sync.SyncStatus">SyncStatus</span></code>
+          </td>
+          <td><ul>
+<li><code>value</code></li>
+</ul></td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_models.sync" href="../models/sync/#prefect_hightouch.api_client.models.sync">sync</a>.<span title="api_models.sync.Sync">Sync</span></code>
+          </td>
+          <td><ul>
+<li><code>id</code>: <code>str</code><br></li>
+<li><code>slug</code>: <code>str</code><br></li>
+<li><code>workspace_id</code>: <code>str</code><br></li>
+<li><code>created_at</code>: <code>str</code><br></li>
+<li><code>updated_at</code>: <code>str</code><br></li>
+<li><code>destination_id</code>: <code>str</code><br></li>
+<li><code>model_id</code>: <code>str</code><br></li>
+<li><code>configuration</code>: <code>Dict</code><br></li>
+<li><code>schedule</code>: <code>Dict</code><br></li>
+<li><code>status</code>: <code>"api_models.SyncStatus"</code><br></li>
+<li><code>disabled</code>: <code>bool</code><br></li>
+<li><code>last_run_at</code>: <code>str</code><br></li>
+<li><code>referenced_columns</code>: <code>List[str]</code><br></li>
+<li><code>primary_key</code>: <code>str</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Wait for completion as a subflow.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
+
+<span class="kn">from</span> <span class="nn">prefect_hightouch</span> <span class="kn">import</span> <span class="n">HightouchCredentials</span>
+<span class="kn">from</span> <span class="nn">prefect_hightouch.syncs</span> <span class="kn">import</span> <span class="n">wait_for_sync_run_completion</span>
+
+<span class="nd">@flow</span>
+<span class="k">def</span> <span class="nf">wait_flow</span><span class="p">():</span>
+    <span class="n">hightouch_credentials</span> <span class="o">=</span> <span class="n">HightouchCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;hightouch-token&quot;</span><span class="p">)</span>
+    <span class="n">sync_status</span><span class="p">,</span> <span class="n">sync_metadata</span> <span class="o">=</span> <span class="n">wait_for_sync_run_completion</span><span class="p">(</span>
+        <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">hightouch_credentials</span><span class="p">,</span>
+        <span class="n">sync_id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+        <span class="n">max_wait_seconds</span><span class="o">=</span><span class="mi">1800</span><span class="p">,</span>
+        <span class="n">poll_frequency_seconds</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">sync_metadata</span>
+
+<span class="n">wait_flow</span><span class="p">()</span>
+</code></pre></div></p>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/flows.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">wait_for_sync_run_completion</span><span class="p">(</span>
+    <span class="n">hightouch_credentials</span><span class="p">:</span> <span class="n">HightouchCredentials</span><span class="p">,</span>
+    <span class="n">sync_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">max_wait_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="n">poll_frequency_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">SyncStatus</span><span class="p">,</span> <span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">Sync</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flow that waits for the triggered sync run to complete.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials: Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        sync_id: Sync ID used in formatting the endpoint URL.</span>
+<span class="sd">        max_wait_seconds: Maximum number of seconds to wait for the</span>
+<span class="sd">            entire flow to complete.</span>
+<span class="sd">        poll_frequency_seconds: Number of seconds to wait in between checks for</span>
+<span class="sd">            run completion.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `value`</span>
+<span class="sd">        - `id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `slug`: `str`&lt;br&gt;</span>
+<span class="sd">            - `workspace_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `created_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `updated_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `destination_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `model_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `configuration`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `schedule`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `status`: `&quot;api_models.SyncStatus&quot;`&lt;br&gt;</span>
+<span class="sd">            - `disabled`: `bool`&lt;br&gt;</span>
+<span class="sd">            - `last_run_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `referenced_columns`: `List[str]`&lt;br&gt;</span>
+<span class="sd">            - `primary_key`: `str`&lt;br&gt;</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Wait for completion as a subflow.</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from prefect import flow</span>
+
+<span class="sd">        from prefect_hightouch import HightouchCredentials</span>
+<span class="sd">        from prefect_hightouch.syncs import wait_for_sync_run_completion</span>
+
+<span class="sd">        @flow</span>
+<span class="sd">        def wait_flow():</span>
+<span class="sd">            hightouch_credentials = HightouchCredentials.load(&quot;hightouch-token&quot;)</span>
+<span class="sd">            sync_status, sync_metadata = wait_for_sync_run_completion(</span>
+<span class="sd">                hightouch_credentials=hightouch_credentials,</span>
+<span class="sd">                sync_id=12345,</span>
+<span class="sd">                max_wait_seconds=1800,</span>
+<span class="sd">                poll_frequency_seconds=20,</span>
+<span class="sd">            )</span>
+<span class="sd">            return sync_metadata</span>
+
+<span class="sd">        wait_flow()</span>
+<span class="sd">        ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_run_logger</span><span class="p">()</span>
+    <span class="n">seconds_waited_for_run_completion</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">wait_for</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">while</span> <span class="n">seconds_waited_for_run_completion</span> <span class="o">&lt;=</span> <span class="n">max_wait_seconds</span><span class="p">:</span>
+        <span class="n">sync_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_sync</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+            <span class="n">hightouch_credentials</span><span class="o">=</span><span class="n">hightouch_credentials</span><span class="p">,</span>
+            <span class="n">sync_id</span><span class="o">=</span><span class="n">sync_id</span><span class="p">,</span>
+            <span class="n">wait_for</span><span class="o">=</span><span class="n">wait_for</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">wait_for</span> <span class="o">=</span> <span class="p">[</span><span class="n">sync_future</span><span class="p">]</span>
+
+        <span class="n">sync_metadata</span> <span class="o">=</span> <span class="k">await</span> <span class="n">sync_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="n">sync_slug</span> <span class="o">=</span> <span class="n">sync_metadata</span><span class="o">.</span><span class="n">slug</span>
+        <span class="n">sync_status</span> <span class="o">=</span> <span class="n">sync_metadata</span><span class="o">.</span><span class="n">status</span>
+        <span class="k">if</span> <span class="n">sync_status</span> <span class="ow">in</span> <span class="n">TERMINAL_STATUS_EXCEPTIONS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">sync_status</span><span class="p">,</span> <span class="n">sync_metadata</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Waiting on sync (</span><span class="si">%s</span><span class="s2">, ID </span><span class="si">%s</span><span class="s2">) with sync status </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%s</span><span class="s2"> seconds&quot;</span><span class="p">,</span>
+            <span class="nb">repr</span><span class="p">(</span><span class="n">sync_slug</span><span class="p">),</span>
+            <span class="nb">repr</span><span class="p">(</span><span class="n">sync_id</span><span class="p">),</span>
+            <span class="nb">repr</span><span class="p">(</span><span class="n">sync_status</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+            <span class="n">poll_frequency_seconds</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_frequency_seconds</span><span class="p">)</span>
+        <span class="n">seconds_waited_for_run_completion</span> <span class="o">+=</span> <span class="n">poll_frequency_seconds</span>
+
+    <span class="k">raise</span> <span class="n">HightouchSyncRunTimedOut</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Max wait time of </span><span class="si">{</span><span class="n">max_wait_seconds</span><span class="si">}</span><span class="s2"> seconds exceeded while waiting &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;for sync (</span><span class="si">{</span><span class="n">sync_slug</span><span class="si">!r}</span><span class="s2">, ID </span><span class="si">{</span><span class="n">sync_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_hightouch.syncs.generated" class="doc doc-heading">
+          <code>generated</code>
+
+
+</h2>
+
+  <div class="doc doc-contents ">
+  
+      <p>This is a module containing tasks, auto-generated from the Hightouch
+REST schema, used for interacting with syncs.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.generated.get_sync" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_sync</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Retrieve sync from sync ID.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sync_id</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>Sync ID used in formatting the endpoint URL.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_client.models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_client.models.sync" href="../models/sync/#prefect_hightouch.api_client.models.sync">sync</a>.<span title="api_models.sync.Sync">Sync</span></code>
+          </td>
+          <td><ul>
+<li><code>id</code>: <code>str</code><br></li>
+<li><code>slug</code>: <code>str</code><br></li>
+<li><code>workspace_id</code>: <code>str</code><br></li>
+<li><code>created_at</code>: <code>str</code><br></li>
+<li><code>updated_at</code>: <code>str</code><br></li>
+<li><code>destination_id</code>: <code>str</code><br></li>
+<li><code>model_id</code>: <code>str</code><br></li>
+<li><code>configuration</code>: <code>Dict</code><br></li>
+<li><code>schedule</code>: <code>Dict</code><br></li>
+<li><code>status</code>: <code>"models.SyncStatus"</code><br></li>
+<li><code>disabled</code>: <code>bool</code><br></li>
+<li><code>last_run_at</code>: <code>str</code><br></li>
+<li><code>referenced_columns</code>: <code>List[str]</code><br></li>
+<li><code>primary_key</code>: <code>str</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+      <h4>API Endpoint:</h4>
+<p><code>/syncs/{sync_id}</code></p>
+<h4>API Responses:</h4>
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Ok.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found.</td>
+</tr>
+</tbody>
+</table>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/generated.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="nd">@_update_kwargs_and_execute</span><span class="p">(</span><span class="n">_get_sync_endpoint</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_sync</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">Sync</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve sync from sync ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials (HightouchCredentials):</span>
+<span class="sd">            Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        sync_id (float):</span>
+<span class="sd">            Sync ID used in formatting the endpoint URL.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `slug`: `str`&lt;br&gt;</span>
+<span class="sd">            - `workspace_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `created_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `updated_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `destination_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `model_id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `configuration`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `schedule`: `Dict`&lt;br&gt;</span>
+<span class="sd">            - `status`: `&quot;models.SyncStatus&quot;`&lt;br&gt;</span>
+<span class="sd">            - `disabled`: `bool`&lt;br&gt;</span>
+<span class="sd">            - `last_run_at`: `str`&lt;br&gt;</span>
+<span class="sd">            - `referenced_columns`: `List[str]`&lt;br&gt;</span>
+<span class="sd">            - `primary_key`: `str`&lt;br&gt;</span>
+
+<span class="sd">    &lt;h4&gt;API Endpoint:&lt;/h4&gt;</span>
+<span class="sd">    `/syncs/{sync_id}`</span>
+
+<span class="sd">    &lt;h4&gt;API Responses:&lt;/h4&gt;</span>
+<span class="sd">    | Response | Description |</span>
+<span class="sd">    | --- | --- |</span>
+<span class="sd">    | 200 | Ok. |</span>
+<span class="sd">    | 401 | Unauthorized. |</span>
+<span class="sd">    | 404 | Not found. |</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="o">...</span>  <span class="c1"># pragma: no cover because only the decorated function gets run</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.generated.list_sync" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">list_sync</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>List all the syncs in the current workspace.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>slug</code></td>
+          <td>
+                <code>Optional[str]]</code>
+          </td>
+          <td><p>Filter based on slug.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>model_id</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Filter based on modelId.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>after</code></td>
+          <td>
+                <code>Optional[datetime.datetime]]</code>
+          </td>
+          <td><p>Select syncs that were run after given time.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>before</code></td>
+          <td>
+                <code>Optional[datetime.datetime]]</code>
+          </td>
+          <td><p>Select syncs that were run before given time.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>limit</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Limit the number of object it returns. Default is 100.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>order_by</code></td>
+          <td>
+                <code>Optional[models.list_sync_order_by.ListSyncOrderBy]]</code>
+          </td>
+          <td><p>Specify the order.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>typing.<span title="typing.List">List</span>[<span title="prefect_hightouch.api_client.models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_client.models.sync" href="../models/sync/#prefect_hightouch.api_client.models.sync">sync</a>.<span title="api_models.sync.Sync">Sync</span>]</code>
+          </td>
+          <td><ul>
+<li><code>data</code>: <code>List</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+      <h4>API Endpoint:</h4>
+<p><code>/syncs</code></p>
+<h4>API Responses:</h4>
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Ok.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Failed.</td>
+</tr>
+</tbody>
+</table>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/generated.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="nd">@_update_kwargs_and_execute</span><span class="p">(</span><span class="n">_list_sync_endpoint</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">list_sync</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">api_models</span><span class="o">.</span><span class="n">sync</span><span class="o">.</span><span class="n">Sync</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List all the syncs in the current workspace.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials (HightouchCredentials):</span>
+<span class="sd">            Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        slug (Optional[str]]):</span>
+<span class="sd">            Filter based on slug.</span>
+<span class="sd">        model_id (Optional[float]]):</span>
+<span class="sd">            Filter based on modelId.</span>
+<span class="sd">        after (Optional[datetime.datetime]]):</span>
+<span class="sd">            Select syncs that were run after given time.</span>
+<span class="sd">        before (Optional[datetime.datetime]]):</span>
+<span class="sd">            Select syncs that were run before given time.</span>
+<span class="sd">        limit (Optional[float]]):</span>
+<span class="sd">            Limit the number of object it returns. Default is 100.</span>
+<span class="sd">        order_by (Optional[models.list_sync_order_by.ListSyncOrderBy]]):</span>
+<span class="sd">            Specify the order.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `data`: `List`&lt;br&gt;</span>
+
+<span class="sd">    &lt;h4&gt;API Endpoint:&lt;/h4&gt;</span>
+<span class="sd">    `/syncs`</span>
+
+<span class="sd">    &lt;h4&gt;API Responses:&lt;/h4&gt;</span>
+<span class="sd">    | Response | Description |</span>
+<span class="sd">    | --- | --- |</span>
+<span class="sd">    | 200 | Ok. |</span>
+<span class="sd">    | 400 | Bad request. |</span>
+<span class="sd">    | 401 | Unauthorized. |</span>
+<span class="sd">    | 422 | Validation Failed. |</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="o">...</span>  <span class="c1"># pragma: no cover because only the decorated function gets run</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.generated.list_sync_runs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">list_sync_runs</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>List all sync runs under a sync.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sync_id</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>Sync ID used in formatting the endpoint URL.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>run_id</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Query for specific run id.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>limit</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Limit the number of object it returns. Default is 5.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>offset</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Setting offset from result(for pagination).</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>after</code></td>
+          <td>
+                <code>Optional[datetime.datetime]]</code>
+          </td>
+          <td><p>Select sync runs that are started after given timestamp.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>before</code></td>
+          <td>
+                <code>Optional[datetime.datetime]]</code>
+          </td>
+          <td><p>Select sync runs that are started before certain timestamp.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>within</code></td>
+          <td>
+                <code>Optional[float]]</code>
+          </td>
+          <td><p>Select sync runs that are started within last given minutes.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>order_by</code></td>
+          <td>
+                <code>Optional[models.list_sync_runs_order_by.ListSyncRunsOrderBy]]</code>
+          </td>
+          <td><p>Specify the order.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>typing.<span title="typing.List">List</span>[<span title="prefect_hightouch.api_client.models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_client.models.sync_run" href="../models/sync_run/#prefect_hightouch.api_client.models.sync_run">sync_run</a>.<span title="api_models.sync_run.SyncRun">SyncRun</span>]</code>
+          </td>
+          <td><ul>
+<li><code>data</code>: <code>List</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+      <h4>API Endpoint:</h4>
+<p><code>/syncs/{sync_id}/runs</code></p>
+<h4>API Responses:</h4>
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Ok.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Failed.</td>
+</tr>
+</tbody>
+</table>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/generated.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="nd">@_update_kwargs_and_execute</span><span class="p">(</span><span class="n">_list_sync_runs_endpoint</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">list_sync_runs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">api_models</span><span class="o">.</span><span class="n">sync_run</span><span class="o">.</span><span class="n">SyncRun</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List all sync runs under a sync.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials (HightouchCredentials):</span>
+<span class="sd">            Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        sync_id (float):</span>
+<span class="sd">            Sync ID used in formatting the endpoint URL.</span>
+<span class="sd">        run_id (Optional[float]]):</span>
+<span class="sd">            Query for specific run id.</span>
+<span class="sd">        limit (Optional[float]]):</span>
+<span class="sd">            Limit the number of object it returns. Default is 5.</span>
+<span class="sd">        offset (Optional[float]]):</span>
+<span class="sd">            Setting offset from result(for pagination).</span>
+<span class="sd">        after (Optional[datetime.datetime]]):</span>
+<span class="sd">            Select sync runs that are started after given timestamp.</span>
+<span class="sd">        before (Optional[datetime.datetime]]):</span>
+<span class="sd">            Select sync runs that are started before certain timestamp.</span>
+<span class="sd">        within (Optional[float]]):</span>
+<span class="sd">            Select sync runs that are started within last given minutes.</span>
+<span class="sd">        order_by (Optional[models.list_sync_runs_order_by.ListSyncRunsOrderBy]]):</span>
+<span class="sd">            Specify the order.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `data`: `List`&lt;br&gt;</span>
+
+<span class="sd">    &lt;h4&gt;API Endpoint:&lt;/h4&gt;</span>
+<span class="sd">    `/syncs/{sync_id}/runs`</span>
+
+<span class="sd">    &lt;h4&gt;API Responses:&lt;/h4&gt;</span>
+<span class="sd">    | Response | Description |</span>
+<span class="sd">    | --- | --- |</span>
+<span class="sd">    | 200 | Ok. |</span>
+<span class="sd">    | 400 | Bad request. |</span>
+<span class="sd">    | 401 | Unauthorized. |</span>
+<span class="sd">    | 422 | Validation Failed. |</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="o">...</span>  <span class="c1"># pragma: no cover because only the decorated function gets run</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.generated.trigger_run" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">trigger_run</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Trigger a new run for the given sync.  If a run is already in progress, this
+queues a sync run that will get executed immediately after the current run
+completes.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sync_id</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Sync ID used in formatting the endpoint URL.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>json_body</code></td>
+          <td>
+                <code>models.<span title="models.trigger_run_input">trigger_run_input</span>.<span title="models.trigger_run_input.TriggerRunInput">TriggerRunInput</span></code>
+          </td>
+          <td><p>The input of a trigger action to run syncs.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_client.models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_client.models.trigger_run_output" href="../models/trigger_run_output/#prefect_hightouch.api_client.models.trigger_run_output">trigger_run_output</a>.<span title="api_models.trigger_run_output.TriggerRunOutput">TriggerRunOutput</span></code>
+          </td>
+          <td><ul>
+<li><code>id</code>: <code>str</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+      <h4>API Endpoint:</h4>
+<p><code>/syncs/{sync_id}/trigger</code></p>
+<h4>API Responses:</h4>
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Ok.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Failed.</td>
+</tr>
+</tbody>
+</table>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/generated.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="nd">@_update_kwargs_and_execute</span><span class="p">(</span><span class="n">_trigger_run_endpoint</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">trigger_run</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">api_models</span><span class="o">.</span><span class="n">trigger_run_output</span><span class="o">.</span><span class="n">TriggerRunOutput</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Trigger a new run for the given sync.  If a run is already in progress, this</span>
+<span class="sd">    queues a sync run that will get executed immediately after the current run</span>
+<span class="sd">    completes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials (HightouchCredentials):</span>
+<span class="sd">            Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        sync_id (str):</span>
+<span class="sd">            Sync ID used in formatting the endpoint URL.</span>
+<span class="sd">        json_body (models.trigger_run_input.TriggerRunInput):</span>
+<span class="sd">            The input of a trigger action to run syncs.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `id`: `str`&lt;br&gt;</span>
+
+<span class="sd">    &lt;h4&gt;API Endpoint:&lt;/h4&gt;</span>
+<span class="sd">    `/syncs/{sync_id}/trigger`</span>
+
+<span class="sd">    &lt;h4&gt;API Responses:&lt;/h4&gt;</span>
+<span class="sd">    | Response | Description |</span>
+<span class="sd">    | --- | --- |</span>
+<span class="sd">    | 200 | Ok. |</span>
+<span class="sd">    | 400 | Bad request. |</span>
+<span class="sd">    | 401 | Unauthorized. |</span>
+<span class="sd">    | 422 | Validation Failed. |</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="o">...</span>  <span class="c1"># pragma: no cover because only the decorated function gets run</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prefect_hightouch.syncs.generated.trigger_run_custom" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">trigger_run_custom</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Trigger a new run globally based on sync id or sync slug  If a run is already in
+progress, this queues a sync run that will get executed immediately after
+the current run completes.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>hightouch_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_hightouch.credentials.HightouchCredentials" href="../credentials/#prefect_hightouch.credentials.generated.HightouchCredentials">HightouchCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Hightouch.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>json_body</code></td>
+          <td>
+                <code>models.<span title="models.trigger_run_custom_input">trigger_run_custom_input</span>.<span title="models.trigger_run_custom_input.TriggerRunCustomInput">TriggerRunCustomInput</span></code>
+          </td>
+          <td><p>The input of a trigger action to run syncs based on sync ID, slug or
+other filters.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prefect_hightouch.api_client.models">api_models</span>.<a class="autorefs autorefs-internal" title="prefect_hightouch.api_client.models.trigger_run_output" href="../models/trigger_run_output/#prefect_hightouch.api_client.models.trigger_run_output">trigger_run_output</a>.<span title="api_models.trigger_run_output.TriggerRunOutput">TriggerRunOutput</span></code>
+          </td>
+          <td><ul>
+<li><code>id</code>: <code>str</code><br></li>
+<li><code>message</code>: <code>str</code><br></li>
+<li><code>details</code>: <code>Dict</code><br></li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+      <h4>API Endpoint:</h4>
+<p><code>/syncs/trigger</code></p>
+<h4>API Responses:</h4>
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Ok.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Failed.</td>
+</tr>
+</tbody>
+</table>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_hightouch/syncs/generated.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="nd">@_update_kwargs_and_execute</span><span class="p">(</span><span class="n">_trigger_run_custom_endpoint</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">trigger_run_custom</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">api_models</span><span class="o">.</span><span class="n">trigger_run_output</span><span class="o">.</span><span class="n">TriggerRunOutput</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Trigger a new run globally based on sync id or sync slug  If a run is already in</span>
+<span class="sd">    progress, this queues a sync run that will get executed immediately after</span>
+<span class="sd">    the current run completes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hightouch_credentials (HightouchCredentials):</span>
+<span class="sd">            Credentials to use for authentication with Hightouch.</span>
+<span class="sd">        json_body (models.trigger_run_custom_input.TriggerRunCustomInput):</span>
+<span class="sd">            The input of a trigger action to run syncs based on sync ID, slug or</span>
+<span class="sd">            other filters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `id`: `str`&lt;br&gt;</span>
+<span class="sd">            - `message`: `str`&lt;br&gt;</span>
+<span class="sd">            - `details`: `Dict`&lt;br&gt;</span>
+
+<span class="sd">    &lt;h4&gt;API Endpoint:&lt;/h4&gt;</span>
+<span class="sd">    `/syncs/trigger`</span>
+
+<span class="sd">    &lt;h4&gt;API Responses:&lt;/h4&gt;</span>
+<span class="sd">    | Response | Description |</span>
+<span class="sd">    | --- | --- |</span>
+<span class="sd">    | 200 | Ok. |</span>
+<span class="sd">    | 400 | Bad request. |</span>
+<span class="sd">    | 401 | Unauthorized. |</span>
+<span class="sd">    | 422 | Validation Failed. |</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="o">...</span>  <span class="c1"># pragma: no cover because only the decorated function gets run</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../credentials/" class="md-footer__link md-footer__link--next" aria-label="Next: Credentials" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Credentials
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>
