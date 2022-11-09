@@ -4,7 +4,7 @@
 
 from .generated import *  # noqa: F401, F403 isort: skip
 
-HightouchCredentials._logo_url = "https://images.ctfassets.net/gm98wzqotmnx/46tBvip09DRXFuFQBm6mHW/9c03ce91d396006a97d5efe0f718e4cc/hightouch.png?h=250"  # noqa: F405, E501
+HightouchCredentials._logo_url = "https://images.ctfassets.net/gm98wzqotmnx/6WT9DIXFrqQy0nA9VRZfuL/40a7039742fca9d053677f58a79aacd5/hightouch.png?h=250"  # noqa: F405, E501
 HightouchCredentials.get_client.__doc__ = """
 Gets a Hightouch REST API Authenticated Client.
 
