@@ -2,8 +2,14 @@
 from http import HTTPStatus
 from typing import BinaryIO, Generic, MutableMapping, Optional, Tuple, TypeVar
 
-from pydantic import BaseModel
-from pydantic.generics import GenericModel
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel
+    from pydantic.v1.generics import GenericModel
+else:
+    from pydantic import BaseModel
+    from pydantic.generics import GenericModel
 
 
 class Unset(BaseModel):

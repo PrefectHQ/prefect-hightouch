@@ -2,7 +2,12 @@ import datetime
 from typing import Any, Dict, List, Type, TypeVar
 
 from dateutil.parser import isoparse
-from pydantic import BaseModel, Field
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel, Field
+else:
+    from pydantic import BaseModel, Field
 
 from ..models.source_configuration import SourceConfiguration
 from ..types import UNSET

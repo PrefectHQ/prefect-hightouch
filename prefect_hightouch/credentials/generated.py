@@ -14,7 +14,12 @@ to perform authenticated interactions with Hightouch.
 from typing import Any, Dict
 
 from prefect.blocks.core import Block
-from pydantic import Field, SecretStr
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import Field, SecretStr
+else:
+    from pydantic import Field, SecretStr
 
 from prefect_hightouch.api_client.client import AuthenticatedClient
 
